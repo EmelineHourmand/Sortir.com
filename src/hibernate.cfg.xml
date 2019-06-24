@@ -10,9 +10,9 @@
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.connection.password"></property>
 		<property name="hibernate.show_sql">true</property>
-		<property name="hibernate.hbm2ddl.auto">create</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
 		<property name="hibernate.connection.pool_size">10</property>
 		<property name="hibernate.current_session_context_class">thread</property>
-		<mapping class="PATH ENTITY"/>
+		<mapping class="fr.eni.sortircom.bo.Participant"/>
 	</session-factory>
 </hibernate-configuration>
