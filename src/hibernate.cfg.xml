@@ -14,5 +14,6 @@
 		<property name="hibernate.connection.pool_size">10</property>
 		<property name="hibernate.current_session_context_class">thread</property>
 		<mapping class="fr.eni.sortircom.bo.Participant"/>
+		<mapping class="fr.eni.sortircom.bo.Event"/>
 	</session-factory>
 </hibernate-configuration>
