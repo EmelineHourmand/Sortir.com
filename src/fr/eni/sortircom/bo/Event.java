@@ -52,5 +52,15 @@ public class Event implements Serializable {
     }
 
 
+    public Event(String name, LocalDateTime eventBeginning, LocalDateTime duration, LocalDateTime registrationLimit, Integer maxRegistration, String description, State state, Site site) {
+        this.name = name;
+        this.eventBeginning = eventBeginning;
+        this.duration = duration;
+        this.registrationLimit = registrationLimit;
+        this.maxRegistration = maxRegistration;
+        this.description = description;
+        this.state = state;
+        this.site = site;
+    }
 }
 
