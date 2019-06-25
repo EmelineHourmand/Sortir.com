@@ -8,6 +8,12 @@ import java.io.Serializable;
 @Data
 @Entity
 @Table
+/**
+ *
+ * @author ehourman2019
+ * Entity Participant
+ *
+ */
 public class Participant implements Serializable {
 
     @Id
@@ -33,9 +39,21 @@ public class Participant implements Serializable {
     @Column
     private boolean actif;
 
+    /**
+     * Empty constructor
+     */
     public Participant() {
     }
 
+    /**
+     * Constructor
+     * @param lastname
+     * @param firstname
+     * @param phone
+     * @param mail
+     * @param adminstrator
+     * @param actif
+     */
     public Participant(String lastname, String firstname, int phone, String mail, boolean adminstrator, boolean actif) {
         this.lastname = lastname;
         this.firstname = firstname;

@@ -1,17 +1,19 @@
 package fr.eni.sortircom.dal.dao.hibernate;
 
-import fr.eni.sortircom.bo.Participant;
-import fr.eni.sortircom.dal.dao.ParticipantDAO;
+import fr.eni.sortircom.bo.Event;
+import fr.eni.sortircom.dal.dao.EventDAO;
 import fr.eni.sortircom.dal.exception.DALException;
 
 /**
  *
- * @author hWasier
+ * @author ehourman2019
  *
  */
-public class HibernateParticipantDAO implements ParticipantDAO {
+public class HibernateEventDAO implements EventDAO {
+
+
     @Override
-    public void insert(Participant participant) throws DALException {
+    public void insert(Event event) throws DALException {
 
     }
 
@@ -26,7 +28,7 @@ public class HibernateParticipantDAO implements ParticipantDAO {
     }
 
     @Override
-    public void update(Participant participant) throws DALException {
+    public void update(Event event) throws DALException {
 
     }
 

@@ -11,6 +11,11 @@ import java.time.LocalTime;
 @Data
 @Entity
 @Table
+/**
+ *
+ * @author hWasier
+ *
+ */
 public class Event implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
