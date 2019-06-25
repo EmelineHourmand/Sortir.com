@@ -1,22 +1,22 @@
 package fr.eni.sortircom.dal.dao;
 
-import fr.eni.sortircom.bo.Participant;
+import fr.eni.sortircom.bo.Event;
 import fr.eni.sortircom.dal.exception.DALException;
 
 /**
  *
- * @author hWasier
+ * @author ehourman2019
  *
  */
-public interface ParticipantDAO {
+public interface EventDAO {
 
-    void insert(Participant participant) throws DALException;
+    void insert(Event event) throws DALException;
 
     void selectAll() throws DALException;
 
     void selectById(Long id) throws DALException;
 
-    void update(Participant participant) throws DALException;
+    void update(Event event) throws DALException;
 
     void delete(Long id) throws DALException;
 }
