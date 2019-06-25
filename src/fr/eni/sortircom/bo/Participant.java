@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Data
 @Entity
-@Table
+@Table(name = "PARTICIPANTS")
 /**
  *
  * @author hWasier2019
@@ -18,25 +18,25 @@ public class Participant implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+    @Column(name = "id_participant")
     private Long idParticipant;
 
-    @Column
+    @Column(name = "lastname", length = 25)
     private String lastname;
 
-    @Column
+    @Column(name = "firstname", length = 25)
     private String firstname;
 
-    @Column
+    @Column(name = "phone")
     private int phone;
 
-    @Column
+    @Column(name = "mail", length = 30)
     private String mail;
 
-    @Column
+    @Column(name = "administrator")
     private boolean adminstrator;
 
-    @Column
+    @Column(name = "actif")
     private boolean actif;
 
     /**
