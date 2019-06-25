@@ -8,51 +8,50 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+/**
+ * @author eHourmand2019
+ * Entity Event
+ */
 @Data
 @Entity
-@Table
-/**
- *
- * @author hWasier
- *
- */
+@Table(name = "EVENTS")
 public class Event implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private Long id;
+    @Column(name = "id_event")
+    private Long idEvent;
 
-    @Column
+    @Column(name = "name")
     private String name;
 
-    @Column
+    @Column(name = "event_beginning")
     private LocalDateTime eventBeginning;
 
-    @Column
-    private LocalTime duration;
+    @Column(name = "duration")
+    private LocalDateTime duration;
 
-    @Column
+    @Column(name = "registration_limit")
     private LocalDateTime registrationLimit;
 
-    @Column
+    @Column(name = "max_registration")
     private Integer maxRegistration;
 
-    @Column
-    private String eventDescription;
+    @Column(name = "description")
+    private String description;
 
-    @Column
+    @Column(name = "state")
     private Character state;
 
     public Event() {
     }
 
-    public Event(String name, LocalDateTime eventBeginning, LocalTime duration, LocalDateTime registrationLimit, Integer maxRegistration, String eventDescription, Character state) {
+    public Event(String name, LocalDateTime eventBeginning, LocalDateTime duration, LocalDateTime registrationLimit, Integer maxRegistration, String description, Character state) {
         this.name = name;
         this.eventBeginning = eventBeginning;
         this.duration = duration;
         this.registrationLimit = registrationLimit;
         this.maxRegistration = maxRegistration;
-        this.eventDescription = eventDescription;
+        this.description = description;
         this.state = state;
     }
 }

@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Table
 /**
  *
- * @author ehourman2019
+ * @author hWasier2019
  * Entity Participant
  *
  */
@@ -19,7 +19,7 @@ public class Participant implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private Long id;
+    private Long idParticipant;
 
     @Column
     private String lastname;
