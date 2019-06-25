@@ -16,7 +16,7 @@ public class Site implements Serializable {
     @Column(name = "id_site")
     private Long idSite;
 
-    @Column(name = "name", length = 25)
+    @Column(name = "name", length = 50)
     private String name;
 
     /**

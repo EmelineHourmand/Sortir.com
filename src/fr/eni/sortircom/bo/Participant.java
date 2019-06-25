@@ -21,16 +21,16 @@ public class Participant implements Serializable {
     @Column(name = "id_participant")
     private Long idParticipant;
 
-    @Column(name = "lastname", length = 25)
+    @Column(name = "lastname", length = 50)
     private String lastname;
 
-    @Column(name = "firstname", length = 25)
+    @Column(name = "firstname", length = 50)
     private String firstname;
 
     @Column(name = "phone")
     private int phone;
 
-    @Column(name = "mail", length = 30)
+    @Column(name = "mail", length = 50)
     private String mail;
 
     @Column(name = "administrator")
