@@ -29,6 +29,10 @@ public class Place implements Serializable {
     @Column(name = "longitude")
     private float longitude;
 
+    @ManyToOne
+    private City city;
+
+
     /**
      * Empty constructor
      */
