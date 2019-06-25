@@ -39,6 +39,9 @@ public class Participant implements Serializable {
     @Column(name = "actif")
     private boolean actif;
 
+
+    private Site site;
+
     /**
      * Empty constructor
      */
