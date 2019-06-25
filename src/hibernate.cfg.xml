@@ -18,6 +18,6 @@
 		<mapping class="fr.eni.sortircom.bo.Site"/>
 		<mapping class="fr.eni.sortircom.bo.Place"/>
 		<mapping class="fr.eni.sortircom.bo.State"/>
-
+		<mapping class="fr.eni.sortircom.bo.City"/>
 	</session-factory>
 </hibernate-configuration>

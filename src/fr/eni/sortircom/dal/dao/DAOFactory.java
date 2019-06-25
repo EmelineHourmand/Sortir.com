@@ -1,9 +1,6 @@
 package fr.eni.sortircom.dal.dao;
 
-import fr.eni.sortircom.dal.dao.hibernate.HibernateCityDAO;
-import fr.eni.sortircom.dal.dao.hibernate.HibernateEventDAO;
-import fr.eni.sortircom.dal.dao.hibernate.HibernateParticipantDAO;
-import fr.eni.sortircom.dal.dao.hibernate.HibernatePlaceDAO;
+import fr.eni.sortircom.dal.dao.hibernate.*;
 
 /**
  *
@@ -19,5 +16,9 @@ public class DAOFactory {
     public static CityDAO getCityDAO() { return new HibernateCityDAO(); }
 
     public static PlaceDAO getPlaceDAO() { return new HibernatePlaceDAO(); }
+
+    public static SiteDAO getSiteDAO() { return new HibernateSiteDAO(); }
+
+    public static StateDAO getStateDAO() { return new HibernateStateDAO(); }
 
 }
