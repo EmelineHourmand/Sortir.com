@@ -30,6 +30,7 @@ public class Place implements Serializable {
     private float longitude;
 
     @ManyToOne
+    @JoinColumn(name="city", referencedColumnName="id_place")
     private City city;
 
 
