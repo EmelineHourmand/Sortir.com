@@ -42,9 +42,22 @@ public class Event implements Serializable {
     @Column(name = "state")
     private Character state;
 
+    /**
+     * Empty Constructor
+     */
     public Event() {
     }
 
+    /**
+     * Constructor
+     * @param name
+     * @param eventBeginning
+     * @param duration
+     * @param registrationLimit
+     * @param maxRegistration
+     * @param description
+     * @param state
+     */
     public Event(String name, LocalDateTime eventBeginning, LocalDateTime duration, LocalDateTime registrationLimit, Integer maxRegistration, String description, Character state) {
         this.name = name;
         this.eventBeginning = eventBeginning;

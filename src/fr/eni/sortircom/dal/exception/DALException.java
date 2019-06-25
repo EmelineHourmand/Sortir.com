@@ -23,7 +23,7 @@ public class DALException extends java.lang.Exception {
     }
 
     /**
-     * Constructor with messagz and throwable exception
+     * Constructor with message and throwable exception
      *
      * @param message
      * @param exception
