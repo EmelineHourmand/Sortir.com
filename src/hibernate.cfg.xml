@@ -15,5 +15,9 @@
 		<property name="hibernate.current_session_context_class">thread</property>
 		<mapping class="fr.eni.sortircom.bo.Participant"/>
 		<mapping class="fr.eni.sortircom.bo.Event"/>
+		<mapping class="fr.eni.sortircom.bo.Site"/>
+		<mapping class="fr.eni.sortircom.bo.Place"/>
+		<mapping class="fr.eni.sortircom.bo.State"/>
+
 	</session-factory>
 </hibernate-configuration>
