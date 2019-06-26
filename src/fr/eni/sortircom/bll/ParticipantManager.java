@@ -7,6 +7,7 @@ import fr.eni.sortircom.bo.Participant;
 import fr.eni.sortircom.dal.dao.DAOFactory;
 import fr.eni.sortircom.dal.dao.ParticipantDAO;
 import fr.eni.sortircom.dal.exception.DALException;
+import fr.eni.sortircom.tools.RegExpPatterns;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,9 +23,6 @@ public class ParticipantManager {
 
     private static ParticipantDAO participantDAO;
 
-    private static final String ALPHANUMERIC_REGEX = "[a-zA-Z0-9]+";
-    private static final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
-    private static final String PHONE_REGEX = "^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$";
 
     /**
      * Constructor
@@ -40,15 +38,15 @@ public class ParticipantManager {
             //TODO
             return null;
         }
-        if (!firstname.matches(ALPHANUMERIC_REGEX)) {
+        if (!firstname.matches(RegExpPatterns.)) {
             //TODO
             return null;
         }
-        if (!phone.matches(PHONE_REGEX)) {
+        if (!phone.matches(RegExpPatterns.PHONE_PATTERN)) {
             //TODO
             return null;
         }
-        if (!mail.matches(EMAIL_REGEX)) {
+        if (!mail.matches(RegExpPatterns.EMAIL_PATTERN)) {
             //TODO
             return null;
         } else {
@@ -62,23 +60,23 @@ public class ParticipantManager {
         }
     }
 
-    public void insertParticipant(Participant participant) throws BLLException, DALException {
+    public void insertParticipant(Participant participant) throws BLLException {
         participantDAO.insert(participant);
     }
 
-    public List<Participant> selectAllParticipant() throws DALException {
+    public List<Participant> selectAllParticipant() throws BLLException {
         return participantDAO.selectAll();
     }
 
-    public Participant selectParticipant(Long id) throws DALException {
+    public Participant selectParticipant(Long id) throws BLLException {
         return participantDAO.selectById(id);
     }
 
-    public void updateParticpant(Participant participant) throws DALException {
+    public void updateParticpant(Participant participant) throws BLLException {
         participantDAO.update(participant);
     }
 
-    public void removeParticipant(Long id) throws DALException {
+    public void removeParticipant(Long id) throws BLLException {
         participantDAO.delete(id);
     }
 }
