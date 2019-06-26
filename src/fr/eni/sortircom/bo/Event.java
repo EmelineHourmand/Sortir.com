@@ -6,7 +6,6 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 /**
  * @author eHourmand2019
@@ -21,7 +20,7 @@ public class Event implements Serializable {
     @Column(name = "id_event")
     private Long idEvent;
 
-    @Column(name = "name")
+    @Column(name = "name", length = 250)
     private String name;
 
     @Column(name = "event_beginning")
@@ -40,7 +39,11 @@ public class Event implements Serializable {
     private String description;
 
     @Column(name = "state")
-    private Character state;
+    private State state;
+
+    @ManyToOne
+    @JoinColumn(name = "id_site")
+    private Site site;
 
     /**
      * Empty Constructor
@@ -48,17 +51,8 @@ public class Event implements Serializable {
     public Event() {
     }
 
-    /**
-     * Constructor
-     * @param name
-     * @param eventBeginning
-     * @param duration
-     * @param registrationLimit
-     * @param maxRegistration
-     * @param description
-     * @param state
-     */
-    public Event(String name, LocalDateTime eventBeginning, LocalDateTime duration, LocalDateTime registrationLimit, Integer maxRegistration, String description, Character state) {
+
+    public Event(String name, LocalDateTime eventBeginning, LocalDateTime duration, LocalDateTime registrationLimit, Integer maxRegistration, String description, State state, Site site) {
         this.name = name;
         this.eventBeginning = eventBeginning;
         this.duration = duration;
@@ -66,6 +60,7 @@ public class Event implements Serializable {
         this.maxRegistration = maxRegistration;
         this.description = description;
         this.state = state;
+        this.site = site;
     }
 }
 

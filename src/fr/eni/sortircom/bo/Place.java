@@ -3,10 +3,14 @@ package fr.eni.sortircom.bo;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.persistence.GenerationType;
 import java.io.Serializable;
 
 
-
+/**
+ * @author jbruneau2019
+ * Entity Place
+ */
 @Data
 @Entity
 @Table(name = "PLACES")
@@ -30,6 +34,7 @@ public class Place implements Serializable {
     private float longitude;
 
     @ManyToOne
+    @JoinColumn(name="city", referencedColumnName="id_place")
     private City city;
 
 
