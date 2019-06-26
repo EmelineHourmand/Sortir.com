@@ -12,7 +12,7 @@ import java.util.List;
  * @author hwasier2019
  * @author Emeline Hourmand
  */
-public abstract class ParticipantManager {
+public class ParticipantManager {
 
     private static ParticipantDAO participantDAO;
 
