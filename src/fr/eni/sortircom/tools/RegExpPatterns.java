@@ -2,21 +2,24 @@ package fr.eni.sortircom.tools;
 
 public abstract class RegExpPatterns {
 
-    // Postal code
-    private static final String POSTAL_CODE_PATTERN = "^((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}$";
+
+
     // Une String de 1 à 50 char
     private static final String TYPE_SQL_STRING_50_PATTERN = "^(.){1,50}$";
     // Une String de 1 à 255 char
     private static final String TYPE_SQL_STRING_255_PATTERN = "^(.){1,255}$";
+
     // email
     private static final String EMAIL_PATTERN = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$";
-
     // Phone number
     private static final String PHONE_PATTERN = "";
+    // Postal code
+    private static final String POSTAL_CODE_PATTERN = "^((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}$";
 
-
-
-
+    // Latitude
+    private static final String LATITUDE_PATTERN = "^(\\+|-)?(?:90(?:(?:\\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\\.[0-9]{1,6})?))$";
+    // Longitude
+    private static final String LONGITUDE_PATTERN = "^(\\+|-)?(?:180(?:(?:\\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\\.[0-9]{1,6})?))$";
 
 
     // IP addresse v4
