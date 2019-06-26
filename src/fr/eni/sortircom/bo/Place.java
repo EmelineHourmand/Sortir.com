@@ -46,13 +46,12 @@ public class Place implements Serializable {
 
     /**
      * Constructor
-     * @param idPlace
      * @param name
      * @param street
      * @param latitude
      * @param longitude
      */
-    public Place(int idPlace, String name, String street, float latitude, float longitude) {
+    public Place(String name, String street, float latitude, float longitude) {
         this.idPlace = idPlace;
         this.name = name;
         this.street = street;

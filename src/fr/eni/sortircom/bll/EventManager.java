@@ -36,21 +36,22 @@ public class EventManager {
         }
     }
 
-    public List<Event> selectAllEvent() throws DALException {
+    public List<Event> selectAllEvent() throws BLLException {
         return eventDAO.selectAll();
     }
 
-    public Event selectEvent(Long id) throws DALException {
+    public Event selectEvent(Long id) throws BLLException {
         return eventDAO.selectById(id);
     }
 
-    public void updateEvent(Event event) throws  DALException {
+    public void updateEvent(Event event) throws  BLLException {
         eventDAO.update(event);
     }
 
-    public void removeEvent(Long id) throws DALException {
+    public void removeEvent(Long id) throws BLLException {
         eventDAO.delete(id);
     }
+
 }
 
 
