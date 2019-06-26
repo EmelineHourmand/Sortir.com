@@ -12,8 +12,7 @@
     <jsp:include page="inc/CSS_JS_global.jsp"></jsp:include>
 </head>
 <header>
-
-
+    <jsp:include page="inc/NavBar_header.jsp"></jsp:include>
 </header>
 <body>
 coucou
