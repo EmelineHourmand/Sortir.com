@@ -25,6 +25,7 @@
       <root url="jar://$PROJECT_DIR$/lib/lombok.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/mysql-connector-java-8.0.16.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/sqljdbc42.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../apache-tomcat-8.5.23/lib/servlet-api.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
