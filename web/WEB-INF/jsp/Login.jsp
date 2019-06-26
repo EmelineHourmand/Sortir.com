@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Title</title>
+    <jsp:include page="inc/CSS_JS_global.jsp"></jsp:include>
 </head>
 <header>
 
