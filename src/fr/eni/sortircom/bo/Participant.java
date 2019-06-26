@@ -14,6 +14,7 @@ import java.io.Serializable;
  * Entity Participant
  *
  */
+
 public class Participant implements Serializable {
 
     @Id
@@ -28,7 +29,7 @@ public class Participant implements Serializable {
     private String firstname;
 
     @Column(name = "phone")
-    private int phone;
+    private String phone;
 
     @Column(name = "mail", length = 50)
     private String mail;
@@ -39,8 +40,10 @@ public class Participant implements Serializable {
     @Column(name = "actif")
     private boolean actif;
 
-
     private Site site;
+
+    @ManyToMany private Event eventParticipator;
+    @OneToMany private Event eventOrganisator;
 
     /**
      * Empty constructor
