@@ -2,10 +2,13 @@ package fr.eni.sortircom.bo;
 
 
 import lombok.Data;
+import org.hibernate.annotations.ManyToAny;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author eHourmand2019
@@ -36,14 +39,24 @@ public class Event implements Serializable {
     private Integer maxRegistration;
 
     @Column(name = "description")
+    @Type(type = "text")
     private String description;
 
-    @Column(name = "state")
+    @ManyToOne
+    @JoinColumn(name = "id_place")
+    private Place place;
+
+    @ManyToOne
+    @JoinColumn(name = "id_state")
     private State state;
 
     @ManyToOne
     @JoinColumn(name = "id_site")
     private Site site;
+
+    @ManyToOne
+    @JoinColumn(name = "id_organizer")
+    private Participant organizer;
 
     /**
      * Empty Constructor
@@ -52,15 +65,5 @@ public class Event implements Serializable {
     }
 
 
-    public Event(String name, LocalDateTime eventBeginning, LocalDateTime duration, LocalDateTime registrationLimit, Integer maxRegistration, String description, State state, Site site) {
-        this.name = name;
-        this.eventBeginning = eventBeginning;
-        this.duration = duration;
-        this.registrationLimit = registrationLimit;
-        this.maxRegistration = maxRegistration;
-        this.description = description;
-        this.state = state;
-        this.site = site;
-    }
 }
 

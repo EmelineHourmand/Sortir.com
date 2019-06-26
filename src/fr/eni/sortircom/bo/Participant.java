@@ -31,11 +31,14 @@ public class Participant implements Serializable {
     @Column(name = "phone")
     private String phone;
 
-    @Column(name = "mail", length = 50)
+    @Column(name = "mail", length = 50, unique = true)
     private String mail;
 
     @Column(name = "administrator")
     private boolean adminstrator;
+
+    @Column(name = "password")
+    private String password;
 
     @Column(name = "actif")
     private boolean actif;
@@ -58,14 +61,16 @@ public class Participant implements Serializable {
      * @param phone
      * @param mail
      * @param adminstrator
+     * @param password
      * @param actif
      */
-    public Participant(String lastname, String firstname, String phone, String mail, boolean adminstrator, boolean actif) {
+    public Participant(String lastname, String firstname, String phone, String mail, boolean adminstrator, String password, boolean actif) {
         this.lastname = lastname;
         this.firstname = firstname;
         this.phone = phone;
         this.mail = mail;
         this.adminstrator = adminstrator;
+        this.password = password;
         this.actif = actif;
     }
 }

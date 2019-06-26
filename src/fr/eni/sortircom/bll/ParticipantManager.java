@@ -5,7 +5,8 @@ import fr.eni.sortircom.bo.Participant;
 import fr.eni.sortircom.dal.dao.DAOFactory;
 import fr.eni.sortircom.dal.dao.ParticipantDAO;
 import fr.eni.sortircom.dal.exception.DALException;
-import fr.eni.sortircom.tools.RegExpPatterns;
+
+import java.util.List;
 
 /**
  * @author hwasier2019
@@ -16,41 +17,17 @@ public abstract class ParticipantManager {
     private static ParticipantDAO participantDAO;
 
     /**
-     * Constructor
-     *
-     * @throws BLLException
+     * Constructor (Singleton)
      */
     public ParticipantManager() {
         participantDAO = DAOFactory.getParticipantDAO();
     }
 
-    public static Participant checkParticipant(String lastname, String firstname, String phone, String mail, boolean administrator, boolean actif) {
-        if (!lastname.matches(RegExpPatterns.ALPHANUMERIC_PATTERN)) {
-            //TODO
-            return null;
-        }
-        if (!firstname.matches(RegExpPatterns.ALPHANUMERIC_PATTERN)) {
-            //TODO
-            return null;
-        }
-        if (!phone.matches(RegExpPatterns.PHONE_PATTERN)) {
-            //TODO
-            return null;
-        }
-        if (!mail.matches(RegExpPatterns.EMAIL_PATTERN)) {
-            //TODO
-            return null;
-        } else {
-            return new Participant(lastname, firstname, phone, mail, administrator, actif);
-        }
-    }
-
-    public static void checkMail(String mail) throws DALException {
-        if (participantDAO.checkByEmail(mail)!=0){
-            //TODO
-        }
-    }
-
+    /**
+     * Verification et insertion d'un PARTICIPANT
+     * @return
+     * @throws BLLException
+     */
     public void insertParticipant(Participant participant) throws BLLException {
         try {
             participantDAO.insert(participant);
@@ -59,22 +36,42 @@ public abstract class ParticipantManager {
         }
     }
 
-    /*public void selectAllParticipant() throws BLLException {
+    /**
+     * Selection de tout les PARTICIPANT en BDD
+     * @return
+     * @throws BLLException
+     */
+    public List<Participant> selectAllParticipant() throws BLLException {
         try {
-            //return participantDAO.selectAll();
+            return participantDAO.selectAll();
         } catch (DALException e) {
-            e.printStackTrace();
+            BLLException bllException = new BLLException();
+            bllException.addSuppressed(e);
+            throw bllException;
         }
     }
 
-    public void selectParticipant(Long id) throws BLLException {
+    /**
+     * Selection d'un seul PARTICIPANT
+     * @param id
+     * @return
+     * @throws BLLException
+     */
+    public Participant selectParticipant(Long id) throws BLLException {
         try {
-          //  return participantDAO.selectById(id);
-        } catch (DALException e) {
-            e.printStackTrace();
+            return participantDAO.selectById(id);
+        }catch (DALException e) {
+            BLLException bllException = new BLLException();
+            bllException.addSuppressed(e);
+            throw bllException;
         }
-    }*/
+    }
 
+    /**
+     * Modification d'un PARTICIPANT
+     * @param participant
+     * @throws BLLException
+     */
     public void updateParticpant(Participant participant) throws BLLException {
         try {
             participantDAO.update(participant);
@@ -83,11 +80,34 @@ public abstract class ParticipantManager {
         }
     }
 
+    /**
+     * Suppression d'un PARTICIPANT
+     * @param id
+     * @throws BLLException
+     */
     public void removeParticipant(Long id) throws BLLException {
         try {
             participantDAO.delete(id);
         } catch (DALException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Vérifie si le PARTICIPANT créé remplis tout les critères avant insertion en BDD.
+     * @param participant
+     * @return
+     */
+    public static boolean checkParticipant(Participant participant) {
+        return false;
+    }
+
+    /**
+     * Vérifie si l'EMAIL n'est pas déjà utilisé.
+     * @param mail
+     * @return
+     */
+    public static boolean checkMail(String mail) throws DALException {
+       return false;
     }
 }

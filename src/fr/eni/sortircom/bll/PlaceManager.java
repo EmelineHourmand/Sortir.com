@@ -1,7 +1,5 @@
 package fr.eni.sortircom.bll;
 
-
-import fr.eni.sortircom.bll.exception.BLLException;
 import fr.eni.sortircom.bo.Place;
 import fr.eni.sortircom.dal.dao.DAOFactory;
 import fr.eni.sortircom.dal.dao.PlaceDAO;
@@ -12,7 +10,7 @@ import java.util.List;
 /**
  * @author jbruneau2019
  */
-public class PlaceManager {
+public abstract class PlaceManager {
 
     private static PlaceDAO placeDAO;
 

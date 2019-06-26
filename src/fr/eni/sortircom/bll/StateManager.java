@@ -1,78 +1,42 @@
 package fr.eni.sortircom.bll;
 
 import fr.eni.sortircom.bll.exception.BLLException;
-import fr.eni.sortircom.bo.City;
-import fr.eni.sortircom.dal.dao.CityDAO;
+import fr.eni.sortircom.bo.State;
 import fr.eni.sortircom.dal.dao.DAOFactory;
+import fr.eni.sortircom.dal.dao.StateDAO;
 import fr.eni.sortircom.dal.exception.DALException;
-import fr.eni.sortircom.tools.RegExpPatterns;
 
 import java.util.List;
 
-
 /**
- * @author jbruneau2019
  * @author Emeline Hourmand
  */
-public abstract class CityManager {
+public abstract class StateManager {
 
-    private static CityDAO cityDAO;
+    private static StateDAO stateDAO;
 
     /**
      * Constructor (Singleton)
      */
-    public CityManager(){
-        cityDAO = DAOFactory.getCityDAO();
-    }
+    public StateManager() { stateDAO = DAOFactory.getStateDAO(); }
 
     /**
-     * Verification et insertion d'un CITY
-     * @param name
-     * @param postalCode
+     * Verification et insertion d'un STATE
      * @return
      * @throws BLLException
      */
-    public City insertCity(String name, String postalCode) throws BLLException {
-        BLLException bllException = new BLLException();
-        City city = new City(name, postalCode);
-        if(checkCity(city)){
-            System.out.println(bllException.errorsToString());
-            throw bllException;
-        }
-        try {
-            cityDAO.insert(city);
-        }catch (DALException e) {
-            //e.printStackTrace();
-            bllException.addSuppressed(e);
-            throw bllException;
-        }
-        return city;
+    public State insertState() throws BLLException {
+        return null;
     }
 
     /**
-     * Selection de tout les CITY en BDD
+     * Selection de tout les STATE en BDD
      * @return
      * @throws BLLException
      */
-    public List<City> selectAllCity() throws BLLException {
+    public List<State> selectAllState() throws BLLException {
         try {
-            return cityDAO.selectAll();
-        } catch (DALException e) {
-            BLLException bllException = new BLLException();
-            bllException.addSuppressed(e);
-            throw bllException;
-        }
-    }
-
-    /**
-     * Selection d'un seul CITY
-     * @param id
-     * @return
-     * @throws BLLException
-     */
-    public City selectCity(Long id) throws BLLException {
-        try {
-            return cityDAO.selectById(id);
+            return stateDAO.selectAll();
         }catch (DALException e) {
             BLLException bllException = new BLLException();
             bllException.addSuppressed(e);
@@ -81,18 +45,34 @@ public abstract class CityManager {
     }
 
     /**
-     * Modification d'un CITY
-     * @param city
+     * Selection d'un seul STATE
+     * @param id
+     * @return
      * @throws BLLException
      */
-    public void updateCity(City city) throws BLLException {
+    public State selectState(Long id) throws BLLException {
+        try {
+            return stateDAO.selectById(id);
+        }catch (DALException e) {
+            BLLException bllException = new BLLException();
+            bllException.addSuppressed(e);
+            throw bllException;
+        }
+    }
+
+    /**
+     * Modification d'un SITE
+     * @param state
+     * @throws BLLException
+     */
+    public void updateState(State state) throws BLLException {
         BLLException bllException = new BLLException();
-        if(checkCity(city)){
+        if(checkState(state)){
             System.out.println(bllException.errorsToString());
             throw bllException;
         }
         try {
-            cityDAO.update(city);
+            stateDAO.update(state);
         }catch (DALException e) {
             bllException.addSuppressed(e);
             throw bllException;
@@ -100,13 +80,13 @@ public abstract class CityManager {
     }
 
     /**
-     * Suppression d'un CITY
+     * Suppression d'un SITE
      * @param id
      * @throws BLLException
      */
-    public void removeCity(Long id) throws BLLException {
+    public void removeState(Long id) throws BLLException {
         try {
-            cityDAO.delete(id);
+            stateDAO.delete(id);
         }catch (DALException e) {
             BLLException bllException = new BLLException();
             bllException.addSuppressed(e);
@@ -116,11 +96,10 @@ public abstract class CityManager {
 
     /**
      * Vérifie si le SITE créé remplis tout les critères avant insertion en BDD.
-     * @param city
+     * @param state
      * @return
      */
-    public static boolean checkCity(City city){
+    public static boolean checkState(State state){
         return false;
     }
 }
-
