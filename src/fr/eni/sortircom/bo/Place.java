@@ -3,10 +3,14 @@ package fr.eni.sortircom.bo;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.persistence.GenerationType;
 import java.io.Serializable;
 
 
-
+/**
+ * @author jbruneau2019
+ * Entity Place
+ */
 @Data
 @Entity
 @Table(name = "PLACES")
