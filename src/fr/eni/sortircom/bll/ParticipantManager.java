@@ -1,6 +1,7 @@
 package fr.eni.sortircom.bll;
 
 
+import com.sun.xml.bind.v2.TODO;
 import fr.eni.sortircom.bll.exception.BLLException;
 import fr.eni.sortircom.bo.Participant;
 import fr.eni.sortircom.dal.dao.DAOFactory;
@@ -23,6 +24,7 @@ public class ParticipantManager {
 
     private static final String ALPHANUMERIC_REGEX = "[a-zA-Z0-9]+";
     private static final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
+    private static final String PHONE_REGEX = "^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$";
 
     /**
      * Constructor
@@ -33,23 +35,35 @@ public class ParticipantManager {
         participantDAO = DAOFactory.getParticipantDAO();
     }
 
-    public void insertParticipant(String lastname, String firstname, int phone, String mail, boolean administrator, boolean actif) throws BLLException {
-        try {
-            Participant participant = new Participant(lastname, firstname, phone, mail, administrator, actif);
-            int switchvariable = -1;
-            if (!lastname.matches(ALPHANUMERIC_REGEX)) {
-                switchvariable = 1;
-            }
-            if (!firstname.matches(ALPHANUMERIC_REGEX)) {
-                switchvariable = 2;
-            }
-            if (!mail.matches(EMAIL_REGEX)) {
-                switchvariable = 4;
-            }
-            participantDAO.insert(participant);
-        } catch (DALException e) {
-            e.printStackTrace();
+    public static Participant checkParticipant(String lastname, String firstname, String phone, String mail, boolean administrator, boolean actif) {
+        if (!lastname.matches(ALPHANUMERIC_REGEX)) {
+            //TODO
+            return null;
         }
+        if (!firstname.matches(ALPHANUMERIC_REGEX)) {
+            //TODO
+            return null;
+        }
+        if (!phone.matches(PHONE_REGEX)) {
+            //TODO
+            return null;
+        }
+        if (!mail.matches(EMAIL_REGEX)) {
+            //TODO
+            return null;
+        } else {
+            return new Participant(lastname, firstname, phone, mail, administrator, actif);
+        }
+    }
+
+    public static void checkMail(String mail) throws DALException {
+        if (participantDAO.checkByEmail(mail)!=0){
+            //TODO
+        }
+    }
+
+    public void insertParticipant(Participant participant) throws BLLException, DALException {
+        participantDAO.insert(participant);
     }
 
     public List<Participant> selectAllParticipant() throws DALException {

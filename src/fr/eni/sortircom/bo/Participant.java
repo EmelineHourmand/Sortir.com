@@ -60,7 +60,7 @@ public class Participant implements Serializable {
      * @param adminstrator
      * @param actif
      */
-    public Participant(String lastname, String firstname, int phone, String mail, boolean adminstrator, boolean actif) {
+    public Participant(String lastname, String firstname, String phone, String mail, boolean adminstrator, boolean actif) {
         this.lastname = lastname;
         this.firstname = firstname;
         this.phone = phone;

@@ -21,4 +21,6 @@ public interface ParticipantDAO {
     void update(Participant participant) throws DALException;
 
     void delete(Long id) throws DALException;
+
+    int checkByEmail(String email) throws DALException;
 }
