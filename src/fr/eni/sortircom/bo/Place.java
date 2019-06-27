@@ -24,7 +24,7 @@ public class Place implements Serializable {
     @Column(name = "name", length = 50)
     private String name;
 
-    @Column(name = "street", length = 255)
+    @Column(name = "street")
     private String street;
 
     @Column(name = "latitude")
@@ -33,9 +33,9 @@ public class Place implements Serializable {
     @Column(name = "longitude")
     private float longitude;
 
-   /* @ManyToOne
-    @JoinColumn(name="city", referencedColumnName="id_place")
-    private City city; */
+    @ManyToOne
+    @JoinColumn(name="id_city")
+    private City city;
 
 
     /**
