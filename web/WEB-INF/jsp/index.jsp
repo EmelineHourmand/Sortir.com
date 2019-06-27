@@ -36,20 +36,23 @@
 <div class="row">
     <div class="col-sm-5">
         Filtrer les sorties <br>
-        Site:
-        <div class="dropdown">
+        <div class="dropdown dropright">
             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown link
+                Site
             </a>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <c:forEach var="Site" items="${}"
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <c:forEach var="Site" items="${listeSite}">
+                <option class="dropdown-item" value="${Site.getName()}" name="${Site.getName()}">${Site.getName()}</option>
+                </c:forEach>
             </div>
         </div>
-        Le nom de la sortie contient: <br>
+        <form class="form-inline" action="search" method="post">
+            Le nom de la sortie contient:
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <br>
         Entre et
     </div>
     <div class="col-sm-5">

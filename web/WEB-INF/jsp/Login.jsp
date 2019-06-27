@@ -44,7 +44,7 @@
                         <form name="loginForm" action="${pageContext.request.contextPath}/login" method="post">
                             <div class="form-group">
                                 <label for="inputEmail">Email :</label>
-                                <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Addresse mail" required autofocus>
+                                <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Addresse mail" value="${requestScope.email}" required autofocus>
                             </div>
 
                             <div class="form-group">
@@ -53,7 +53,7 @@
                             </div>
 
                             <div class="float-right custom-control custom-checkbox mb-3">
-                                <input type="checkbox" name="remembreMe" class="custom-control-input" id="remembreMe">
+                                <input type="checkbox" name="remembreMe" class="custom-control-input" id="remembreMe" ${(requestScope.remembreMe == 'on')? 'checked' : ''}>
                                 <label class="custom-control-label" for="remembreMe">Se rappeler de moi</label>
                             </div>
                             <br><br>

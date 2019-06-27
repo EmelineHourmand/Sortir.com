@@ -31,10 +31,15 @@ public class LoginServlet extends HttpServlet {
             // Login mdp +++ OK +++
             // Ajout du userEmail en cookies si remembreMe est coché
             if (remembreMe != null){
-                // TODO remove this debug
-                System.out.println("remembreMe est bien coché");
+                // Ajout cookie
                 Cookie userCookie = new Cookie("userEmail", ""+user.getMail());
                 userCookie.setMaxAge(1054456406);
+                response.addCookie(userCookie);
+
+            }else{
+                // Invalide la cookie
+                Cookie userCookie = new Cookie("userEmail", "");
+                userCookie.setMaxAge(0);
                 response.addCookie(userCookie);
             }
 
