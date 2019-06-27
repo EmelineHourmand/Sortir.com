@@ -58,12 +58,8 @@ public class Event implements Serializable {
     @JoinColumn(name = "id_organizer")
     private Participant organizer;
 
-    /*@ManyToMany
-    @JoinColumn(name = "participant_event",
-            joinColumns = { @JoinColumn(name = "id_participant") },
-            inverseJoinColumns = { @JoinColumn(name = "id_event") }
-    )
-    private Participant participant;*/
+    @ManyToMany(mappedBy = "eventParticipator")
+    private List<Participant> participant;
 
     /**
      * Empty Constructor
