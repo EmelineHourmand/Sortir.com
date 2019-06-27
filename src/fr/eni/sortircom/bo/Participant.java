@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @Entity
@@ -47,9 +48,13 @@ public class Participant implements Serializable {
     @JoinColumn(name = "id_site")
     private Site site;
 
-    /*@ManyToMany
-    @JoinColumn(name = "id_event")
-    private Event eventParticipator;*/
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "PARTICIPANTS_EVENTS",
+            joinColumns = { @JoinColumn(name = "id_participant") },
+            inverseJoinColumns = { @JoinColumn(name = "id_event") }
+    )
+    private List<Event> eventParticipator;
 
 
     /**

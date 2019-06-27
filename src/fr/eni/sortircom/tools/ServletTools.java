@@ -1,10 +1,16 @@
 package fr.eni.sortircom.tools;
 
+import fr.eni.sortircom.bo.Participant;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
 public abstract class ServletTools {
+
+
+// ------------------- ServletTools universelle : -------------------
+
 
     /**
      * Recherche dans une requête un cookie par sont nom.
@@ -25,5 +31,19 @@ public abstract class ServletTools {
         return null;
     }
 
+
+
+
+
+
+
+
+
+// ------------------- ServletTools propre à l'appli : -------------------
+
+    public static void fakeSessionUser(HttpServletRequest request){
+        Participant user = new Participant("Toto", "Tata", "0123456789", "toto.tata@toto.fr", false, "134", true);
+        request.getSession().setAttribute("user", user);
+    }
 
 }
