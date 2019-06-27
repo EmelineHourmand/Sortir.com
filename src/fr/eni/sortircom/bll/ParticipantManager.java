@@ -52,13 +52,14 @@ public class ParticipantManager {
 
     /**
      * Vérifie le match entre email et password donc que le participant est bien enregistré.
+     * Retourne le Participant si il existe bien en BDD sinon une exception BLLException
      * @param email
      * @param password
-     * @return le Participant si il existe bien en BDD
+     * @return Participant | BLLException
      * @throws BLLException
      */
     public Participant login(String email, String password) throws BLLException {
-        // TODO ceci est un bouchon de code
+        // TODO ceci est un bouchon de code A implémenter
         return new Participant("Toto", "Tata", "0123456789", "toto.tata@toto.fr", false, "134", true);
     }
 
