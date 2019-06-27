@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 /**
  * @author jbruneau2019
- * Entity City
+ * @author Emeline Hourmand
  */
 @Data
 @Entity
@@ -20,18 +20,17 @@ public class City implements Serializable {
     @Column(name = "id_ville")
     private int idVille;
 
-    @Column(name = "name", length = 50)
+    @Column(name = "name", length = 50, nullable = false)
     private String name;
 
-    @Column(name = "postal_code", length = 5)
+    @Column(name = "postal_code", length = 5, nullable = false)
     private String postalCode;
 
 
     /**
      * Empty Constructor
      */
-    public City() {
-    }
+    public City() {}
 
     /**
      * Constructor

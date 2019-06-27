@@ -18,7 +18,7 @@ public class State implements Serializable {
     @Column(name = "id_state")
     private Long idState;
 
-    @Column(name = "wording", length = 50)
+    @Column(name = "wording", length = 50, nullable = false)
     private String wording;
 
     /**
@@ -32,8 +32,5 @@ public class State implements Serializable {
     /**
      * Empty Constructor
      */
-    public State() {
-    }
-
-
+    public State() {}
 }

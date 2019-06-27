@@ -2,17 +2,14 @@ package fr.eni.sortircom.bo;
 
 
 import lombok.Data;
-import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * @author eHourmand2019
- * Entity Event
  */
 @Data
 @Entity
@@ -23,19 +20,19 @@ public class Event implements Serializable {
     @Column(name = "id_event")
     private Long idEvent;
 
-    @Column(name = "name", length = 250)
+    @Column(name = "name", length = 250, nullable = false)
     private String name;
 
-    @Column(name = "event_beginning")
+    @Column(name = "event_beginning", nullable = false)
     private LocalDateTime eventBeginning;
 
     @Column(name = "duration")
     private LocalDateTime duration;
 
-    @Column(name = "registration_limit")
+    @Column(name = "registration_limit", nullable = false)
     private LocalDateTime registrationLimit;
 
-    @Column(name = "max_registration")
+    @Column(name = "max_registration", nullable = false)
     private Integer maxRegistration;
 
     @Column(name = "description")
@@ -43,30 +40,51 @@ public class Event implements Serializable {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "id_place")
+    @JoinColumn(name = "id_place", nullable = false)
     private Place place;
 
     @ManyToOne
-    @JoinColumn(name = "id_state")
+    @JoinColumn(name = "id_state", nullable = false)
     private State state;
 
     @ManyToOne
-    @JoinColumn(name = "id_site")
+    @JoinColumn(name = "id_site", nullable = false)
     private Site site;
 
     @ManyToOne
-    @JoinColumn(name = "id_organizer")
+    @JoinColumn(name = "id_organizer", nullable = false)
     private Participant organizer;
-
-    @ManyToMany(mappedBy = "eventParticipator")
-    private List<Participant> participant;
 
     /**
      * Empty Constructor
      */
-    public Event() {
+    public Event() {}
+
+    /**
+     * Constructor
+     * @param name
+     * @param eventBeginning
+     * @param duration
+     * @param registrationLimit
+     * @param maxRegistration
+     * @param description
+     * @param place
+     * @param state
+     * @param site
+     * @param organizer
+     */
+    public Event(String name, LocalDateTime eventBeginning, LocalDateTime duration, LocalDateTime registrationLimit,
+                 Integer maxRegistration, String description, Place place, State state, Site site, Participant organizer) {
+        this.name = name;
+        this.eventBeginning = eventBeginning;
+        this.duration = duration;
+        this.registrationLimit = registrationLimit;
+        this.maxRegistration = maxRegistration;
+        this.description = description;
+        this.place = place;
+        this.state = state;
+        this.site = site;
+        this.organizer = organizer;
     }
-
-
 }
 
