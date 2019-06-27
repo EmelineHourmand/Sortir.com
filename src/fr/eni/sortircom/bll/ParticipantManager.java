@@ -48,6 +48,10 @@ public class ParticipantManager {
         }
     }
 
+    public boolean login(String email, String password) throws BLLException {
+        return  true;
+    }
+
     /**
      * Selection de tout les PARTICIPANT en BDD
      * @return
