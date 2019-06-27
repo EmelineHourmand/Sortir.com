@@ -5,8 +5,9 @@ import fr.eni.sortircom.dal.ConnectionProvider;
 import fr.eni.sortircom.dal.dao.EventDAO;
 import fr.eni.sortircom.dal.exception.DALException;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
-import javax.persistence.Query;
+
 import java.util.List;
 
 /**

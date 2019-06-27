@@ -23,7 +23,7 @@ public class ParticipantManager {
     /**
      * Constructor (Singleton)
      */
-    public ParticipantManager() throws BLLException {
+    public ParticipantManager() {
         participantDAO = DAOFactory.getParticipantDAO();
     }
 
@@ -46,6 +46,10 @@ public class ParticipantManager {
         } catch (DALException e) {
             e.printStackTrace();
         }
+    }
+
+    public Participant login(String email, String password) throws BLLException {
+        return new Participant("Toto", "Tata", "0123456789", "toto.tata@toto.fr", false, "134", true);
     }
 
     /**

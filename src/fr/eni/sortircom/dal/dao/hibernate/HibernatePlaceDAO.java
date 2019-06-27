@@ -6,8 +6,8 @@ import fr.eni.sortircom.dal.dao.PlaceDAO;
 import fr.eni.sortircom.dal.exception.DALException;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
-import javax.persistence.Query;
 import java.util.List;
 
 /**
