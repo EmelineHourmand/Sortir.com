@@ -42,7 +42,7 @@ public abstract class ServletTools {
 // ------------------- ServletTools propre à l'appli : -------------------
 
     public static void fakeSessionUser(HttpServletRequest request){
-        Participant user = new Participant("Toto", "Tata", "0123456789", "toto.tata@toto.fr", false, "134", true);
+        Participant user = new Participant("Jojo", "Toto", "Tata", "0123456789", "toto.tata@toto.fr", false, "134", true);
         request.getSession().setAttribute("user", user);
     }
 

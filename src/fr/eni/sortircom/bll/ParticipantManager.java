@@ -59,7 +59,7 @@ public class ParticipantManager {
      */
     public Participant login(String email, String password) throws BLLException {
         // TODO ceci est un bouchon de code
-        return new Participant("Toto", "Tata", "0123456789", "toto.tata@toto.fr", false, "134", true);
+        return new Participant("Jojo", "Toto", "Tata", "0123456789", "toto.tata@toto.fr", false, "134", true);
     }
 
     /**
