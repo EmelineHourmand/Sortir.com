@@ -60,8 +60,8 @@ public class HibernateParticipantDAO implements ParticipantDAO {
     @Override
     public int checkByEmail(String mail) throws DALException {
         Session session = ConnectionProvider.getConnection();
-        Query q = session.createQuery("FROM Participant WHERE mail=:idEmail");
-        q.setParameter("idEmail", mail);
+        Query q = session.createQuery("FROM Participant WHERE mail=:mail");
+        q.setParameter("mail", mail);
         List<Participant> participants = q.getResultList();
         return participants.size();
     }
