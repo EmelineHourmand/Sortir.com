@@ -8,7 +8,12 @@ import fr.eni.sortircom.bll.SiteManager;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.text.DateFormat;
+import java.util.Locale;
+
 
 
 @WebServlet(name = "HomeServlet", urlPatterns = {"/index"})
@@ -34,7 +39,10 @@ public class HomeServlet extends javax.servlet.http.HttpServlet {
             System.out.println(listeSite);
             request.setAttribute("listeSite", listeSite);
 
-
+            Date aujourdhui = new Date();
+            DateFormat shortDateFormat = new SimpleDateFormat("dd-MM-yy");
+            String today = shortDateFormat.format(aujourdhui);
+            request.setAttribute("today", today);
             request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
         } else {
             response.sendRedirect(request.getContextPath() + "/login");
