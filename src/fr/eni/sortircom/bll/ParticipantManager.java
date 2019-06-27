@@ -48,13 +48,22 @@ public class ParticipantManager {
         }
     }
 
+
+    /**
+     * Vérifie le match entre email et password donc que le participant est bien enregistré.
+     * @param email
+     * @param password
+     * @return le Participant si il existe bien en BDD
+     * @throws BLLException
+     */
     public Participant login(String email, String password) throws BLLException {
+        // TODO ceci est un bouchon de code
         return new Participant("Toto", "Tata", "0123456789", "toto.tata@toto.fr", false, "134", true);
     }
 
     /**
      * Selection de tout les PARTICIPANT en BDD
-     * @return
+     * @return La List de tout les participants
      * @throws BLLException
      */
     public List<Participant> selectAllParticipant() throws BLLException {
@@ -70,7 +79,7 @@ public class ParticipantManager {
     /**
      * Selection d'un seul PARTICIPANT
      * @param id
-     * @return
+     * @return Participant correspondant à l'id
      * @throws BLLException
      */
     public Participant selectParticipant(Long id) throws BLLException {
