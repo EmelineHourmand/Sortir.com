@@ -48,6 +48,7 @@ public class Participant implements Serializable {
     @JoinColumn(name = "id_site")
     private Site site;
 
+    // https://www.baeldung.com/hibernate-many-to-many
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "PARTICIPANTS_EVENTS",
