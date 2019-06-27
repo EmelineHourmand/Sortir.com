@@ -7,15 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "LoginServlet",
-            urlPatterns = {"/login"})
+        urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws javax.servlet.ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-
-
 
 
         //response.getWriter().append("Served at: ").append(request.getContextPath());
