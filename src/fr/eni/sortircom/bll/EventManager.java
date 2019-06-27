@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author Emeline Hourmand
  */
-public abstract class EventManager {
+public class EventManager {
 
     private static EventDAO eventDAO;
 
