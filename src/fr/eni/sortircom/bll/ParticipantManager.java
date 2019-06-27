@@ -38,13 +38,14 @@ public class ParticipantManager {
      * - unicité de l'email
      */
     public void insertParticipant(Participant participant) throws BLLException {
+        BLLException bllException = new BLLException();
         try {
-            BLLException bllException = new BLLException();
-            System.out.println("Cherck Participant");
+            checkMail(participant.getMail(), bllException);
             checkParticipant(participant, bllException);
             participantDAO.insert(participant);
         } catch (DALException e) {
-            e.printStackTrace();
+            bllException.addSuppressed(e);
+            throw bllException;
         }
     }
 
@@ -98,10 +99,13 @@ public class ParticipantManager {
      * @throws BLLException
      */
     public void updateParticpant(Participant participant) throws BLLException {
+        BLLException bllException = new BLLException();
         try {
+            checkParticipant(participant, bllException);
             participantDAO.update(participant);
         } catch (DALException e) {
-            e.printStackTrace();
+            bllException.addSuppressed(e);
+            throw bllException;
         }
     }
 
@@ -114,7 +118,9 @@ public class ParticipantManager {
         try {
             participantDAO.delete(id);
         } catch (DALException e) {
-            e.printStackTrace();
+            BLLException bllException = new BLLException();
+            bllException.addSuppressed(e);
+            throw bllException;
         }
     }
 
@@ -129,11 +135,9 @@ public class ParticipantManager {
             bllException.addErreur(CodesErreursBLL.PARTICIPANT_NULL_ERROR);
         } else {
 
-            // MAIL
+            // EMAIL
             if(participant.getMail() == null || participant.getMail().trim().length() == 0 ) {
                 bllException.addErreur(CodesErreursBLL.RULE_PARTICIPANT_EMAIL_EMPTY_ERROR);
-            } else {
-                checkMail(participant.getMail(), bllException);
             }
 
             // NOM
@@ -168,9 +172,9 @@ public class ParticipantManager {
      * @return
      */
     private static void checkMail(String mail, BLLException bllException) {
-        // Si mail non vide
-        if(!bllException.getErrorCodesList().contains(CodesErreursBLL.RULE_PARTICIPANT_EMAIL_EMPTY_ERROR)) {
-            //EMAIL UNIQUE ?
+        if(mail == null || mail.trim().length() == 0 ) {
+            bllException.addErreur(CodesErreursBLL.RULE_PARTICIPANT_EMAIL_EMPTY_ERROR);
+        } else {
             try {
                if(DAOFactory.getParticipantDAO().checkByEmail(mail) != 0) {
                     bllException.addErreur(CodesErreursBLL.RULE_PARTICIPANT_EMAIL_UNIQUE_ERROR);
