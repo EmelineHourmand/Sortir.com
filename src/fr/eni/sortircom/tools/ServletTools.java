@@ -17,7 +17,7 @@ public abstract class ServletTools {
         Cookie[] cookies = request.getCookies();
         if (cookies != null){
             for(Cookie cookie : cookies){
-                if(cookie != null && name.equals(cookie.getName()){
+                if(cookie != null && name.equals(cookie.getName())){
                     return cookie.getValue();
                 }
             }
