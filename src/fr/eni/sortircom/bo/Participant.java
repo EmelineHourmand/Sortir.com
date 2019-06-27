@@ -4,18 +4,14 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
+/**
+ * @author hWasier2019
+ * @author Emeline Hourmand
+ */
 @Data
 @Entity
 @Table(name = "PARTICIPANTS")
-/**
- *
- * @author hWasier2019
- * Entity Participant
- *
- */
-
 public class Participant implements Serializable {
 
     @Id
@@ -23,49 +19,42 @@ public class Participant implements Serializable {
     @Column(name = "id_participant")
     private Long idParticipant;
 
-    @Column(name = "lastname", length = 50)
+    @Column(name = "username", length = 50, nullable = false)
+    private String username;
+
+    @Column(name = "lastname", length = 50, nullable = false)
     private String lastname;
 
-    @Column(name = "firstname", length = 50)
+    @Column(name = "firstname", length = 50, nullable = false)
     private String firstname;
 
-    @Column(name = "phone")
+    @Column(name = "phone", length = 15)
     private String phone;
 
-    @Column(name = "mail", length = 50, unique = true)
+    @Column(name = "mail", length = 50, unique = true, nullable = false)
     private String mail;
 
-    @Column(name = "administrator")
+    @Column(name = "administrator", nullable = false)
     private boolean adminstrator;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "actif")
+    @Column(name = "actif", nullable = false)
     private boolean actif;
 
     @ManyToOne
-    @JoinColumn(name = "id_site")
+    @JoinColumn(name = "id_site", nullable = false)
     private Site site;
-
-    // https://www.baeldung.com/hibernate-many-to-many
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "PARTICIPANTS_EVENTS",
-            joinColumns = { @JoinColumn(name = "id_participant") },
-            inverseJoinColumns = { @JoinColumn(name = "id_event") }
-    )
-    private List<Event> eventParticipator;
-
 
     /**
      * Empty constructor
      */
-    public Participant() {
-    }
+    public Participant() {}
 
     /**
      * Constructor
+     * @param username
      * @param lastname
      * @param firstname
      * @param phone
@@ -73,8 +62,11 @@ public class Participant implements Serializable {
      * @param adminstrator
      * @param password
      * @param actif
+     * @param site
      */
-    public Participant(String lastname, String firstname, String phone, String mail, boolean adminstrator, String password, boolean actif) {
+    public Participant(String username, String lastname, String firstname, String phone, String mail,
+                       boolean adminstrator, String password, boolean actif, Site site) {
+        this.username = username;
         this.lastname = lastname;
         this.firstname = firstname;
         this.phone = phone;
@@ -82,13 +74,6 @@ public class Participant implements Serializable {
         this.adminstrator = adminstrator;
         this.password = password;
         this.actif = actif;
-    }
-
-    public Participant(String lastname, String firstname, String phone, String mail, String password) {
-        this.lastname = lastname;
-        this.firstname = firstname;
-        this.phone = phone;
-        this.mail = mail;
-        this.password = password;
+        this.site = site;
     }
 }

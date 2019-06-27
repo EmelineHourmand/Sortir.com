@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  * @author jbruneau2019
- * Entity Place
+ * @author Emeline Hourmand
  */
 @Data
 @Entity
@@ -21,7 +21,7 @@ public class Place implements Serializable {
     @Column(name = "id_place")
     private int idPlace;
 
-    @Column(name = "name", length = 50)
+    @Column(name = "name", length = 50, nullable = false)
     private String name;
 
     @Column(name = "street")
@@ -34,15 +34,14 @@ public class Place implements Serializable {
     private float longitude;
 
     @ManyToOne
-    @JoinColumn(name="id_city")
+    @JoinColumn(name="id_city", nullable = false)
     private City city;
 
 
     /**
      * Empty constructor
      */
-    public Place(){
-    }
+    public Place(){}
 
     /**
      * Constructor

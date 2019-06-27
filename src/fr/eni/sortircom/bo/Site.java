@@ -5,10 +5,12 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * @author Emeline Hourmand
+ */
 @Data
 @Entity
 @Table(name = "SITES")
-
 public class Site implements Serializable {
 
     @Id
@@ -16,7 +18,7 @@ public class Site implements Serializable {
     @Column(name = "id_site")
     private Long idSite;
 
-    @Column(name = "name", length = 50)
+    @Column(name = "name", length = 50, nullable = false)
     private String name;
 
     /**
@@ -30,6 +32,5 @@ public class Site implements Serializable {
     /**
      * Empty constructor
      */
-    public Site() {
-    }
+    public Site() {}
 }
