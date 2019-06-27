@@ -26,16 +26,28 @@ public class HibernateSiteDAO implements SiteDAO {
 
     @Override
     public Site selectById(Long id) throws DALException {
-        return null;
+        Session session = ConnectionProvider.getConnection();
+        Query q = session.createQuery("FROM Site WHERE id=:idSite");
+        q.setParameter("idSite", id);
+        List<Site> sites = q.getResultList();
+        Site site = sites.get(0);
+        return site;
     }
 
     @Override
     public void update(Site site) throws DALException {
-
+        Session session = ConnectionProvider.getConnection();
+        session.beginTransaction();
+        session.saveOrUpdate(site);
+        session.getTransaction().commit();
     }
 
     @Override
     public void delete(Long id) throws DALException {
-
+        Session session = ConnectionProvider.getConnection();
+        Site site = session.get(Site.class, id);
+        session.beginTransaction();
+        session.delete(site);
+        session.getTransaction().commit();
     }
 }

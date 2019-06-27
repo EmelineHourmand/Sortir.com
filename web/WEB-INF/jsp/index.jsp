@@ -43,10 +43,9 @@
             </a>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <c:forEach var="Site" items="${}"
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <c:forEach var="Site" items="${listeSite}">
+                <a class="dropdown-item" name="site" value="${Site.getName()}">${Site.getName()}</a>
+                </c:forEach>
             </div>
         </div>
         Le nom de la sortie contient: <br>
