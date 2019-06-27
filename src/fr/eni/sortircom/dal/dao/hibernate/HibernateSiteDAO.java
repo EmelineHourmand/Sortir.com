@@ -1,6 +1,5 @@
 package fr.eni.sortircom.dal.dao.hibernate;
 
-import fr.eni.sortircom.bo.Participant;
 import fr.eni.sortircom.bo.Site;
 import fr.eni.sortircom.dal.ConnectionProvider;
 import fr.eni.sortircom.dal.dao.SiteDAO;
