@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author Emeline Hourmand
  */
-public abstract class SiteManager {
+public class SiteManager {
 
     private static SiteDAO siteDAO;
 

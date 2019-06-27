@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author jbruneau2019
  */
-public abstract class PlaceManager {
+public class PlaceManager {
 
     private static PlaceDAO placeDAO;
 
