@@ -48,8 +48,8 @@ public class ParticipantManager {
         }
     }
 
-    public boolean login(String email, String password) throws BLLException {
-        return  true;
+    public Participant login(String email, String password) throws BLLException {
+        return new Participant("Toto", "Tata", "0123456789", "toto.tata@toto.fr", false, "134", true);
     }
 
     /**
