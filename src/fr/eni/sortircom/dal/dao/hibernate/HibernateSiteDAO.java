@@ -1,8 +1,12 @@
 package fr.eni.sortircom.dal.dao.hibernate;
 
+import fr.eni.sortircom.bo.Participant;
 import fr.eni.sortircom.bo.Site;
+import fr.eni.sortircom.dal.ConnectionProvider;
 import fr.eni.sortircom.dal.dao.SiteDAO;
 import fr.eni.sortircom.dal.exception.DALException;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -14,7 +18,10 @@ public class HibernateSiteDAO implements SiteDAO {
 
     @Override
     public List<Site> selectAll() throws DALException {
-        return null;
+        Session session = ConnectionProvider.getConnection();
+        Query q = session.createQuery("FROM Site ");
+        List<Site> siteList = q.getResultList();
+        return siteList;
     }
 
     @Override
