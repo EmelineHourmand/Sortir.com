@@ -23,7 +23,7 @@ public class ParticipantManager {
     /**
      * Constructor (Singleton)
      */
-    public ParticipantManager() throws BLLException {
+    public ParticipantManager() {
         participantDAO = DAOFactory.getParticipantDAO();
     }
 
