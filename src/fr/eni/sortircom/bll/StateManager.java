@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author Emeline Hourmand
  */
-public abstract class StateManager {
+public class StateManager {
 
     private static StateDAO stateDAO;
 

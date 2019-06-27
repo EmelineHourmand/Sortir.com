@@ -16,14 +16,14 @@ import static fr.eni.sortircom.tools.RegExpPatterns.PHONE_PATTERN;
  * @author hwasier2019
  * @author Emeline Hourmand
  */
-public abstract class ParticipantManager {
+public class ParticipantManager {
 
     private static ParticipantDAO participantDAO;
 
     /**
      * Constructor (Singleton)
      */
-    public ParticipantManager() {
+    public ParticipantManager() throws BLLException {
         participantDAO = DAOFactory.getParticipantDAO();
     }
 
@@ -40,6 +40,7 @@ public abstract class ParticipantManager {
     public void insertParticipant(Participant participant) throws BLLException {
         try {
             BLLException bllException = new BLLException();
+            System.out.println("Cherck Participant");
             checkParticipant(participant, bllException);
             participantDAO.insert(participant);
         } catch (DALException e) {

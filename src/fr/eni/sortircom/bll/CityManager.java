@@ -14,7 +14,7 @@ import java.util.List;
  * @author jbruneau2019
  * @author Emeline Hourmand
  */
-public abstract class CityManager {
+public class CityManager {
 
     private static CityDAO cityDAO;
 
