@@ -43,10 +43,14 @@ public class Participant implements Serializable {
     @Column(name = "actif")
     private boolean actif;
 
+    @ManyToOne
+    @JoinColumn(name = "id_site")
     private Site site;
 
-    @ManyToMany private Event eventParticipator;
-    @OneToMany private Event eventOrganisator;
+    /*@ManyToMany
+    @JoinColumn(name = "id_event")
+    private Event eventParticipator;*/
+
 
     /**
      * Empty constructor

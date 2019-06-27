@@ -172,7 +172,7 @@ public class ParticipantManager {
         if(!bllException.getErrorCodesList().contains(CodesErreursBLL.RULE_PARTICIPANT_EMAIL_EMPTY_ERROR)) {
             //EMAIL UNIQUE ?
             try {
-                if(DAOFactory.getParticipantDAO().checkByEmail(mail) != 0) {
+               if(DAOFactory.getParticipantDAO().checkByEmail(mail) != 0) {
                     bllException.addErreur(CodesErreursBLL.RULE_PARTICIPANT_EMAIL_UNIQUE_ERROR);
                 } else {
                     // Si pattern ne correspond pas a la règle

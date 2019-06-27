@@ -7,6 +7,9 @@
         <element id="directory" name="classes">
           <element id="module-output" name="Sortir.com" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Hibernate 5.4.2-5.4.2" />
+        </element>
       </element>
     </root>
   </artifact>
