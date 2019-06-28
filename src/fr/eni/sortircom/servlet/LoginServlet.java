@@ -64,6 +64,7 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
+
         if(request.getSession().getAttribute("user") != null){
             // Utilisateur déjà connecté (user dans session)
 
