@@ -10,7 +10,15 @@ import java.io.IOException;
 @WebServlet(name = "SearchServlet")
 public class SearchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getSession().getAttribute("user") != null) {
 
+        // Récupération du site selectionné
+        String siteRecherche = request.getParameter("site");
+        System.out.println("site recherché: " + siteRecherche);
+
+        } else {
+            response.sendRedirect(request.getContextPath() + "/login");
+        }
 
     }
 

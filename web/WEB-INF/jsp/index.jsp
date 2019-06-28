@@ -45,14 +45,14 @@
 
                 <div class="dropdown dropright">
                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="site">
                         Site
                     </a>
 
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <c:forEach var="Site" items="${listeSite}">
                             <option class="dropdown-item" value="${Site.getName()}"
-                                    name="${Site.getName()}">${Site.getName()}</option>
+                                    name="site">${Site.getName()}</option>
                         </c:forEach>
                     </div>
                 </div>
@@ -115,6 +115,5 @@
 </div>
 
 
-<jsp:include page="inc/CSS_JS_global.jsp"></jsp:include>
 </body>
 </html>
