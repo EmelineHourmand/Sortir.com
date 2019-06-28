@@ -9,11 +9,11 @@
 <html>
 <head>
     <title>Title</title>
-    <jsp:include page="inc/CSS_JS_global.jsp"></jsp:include>
+    <jsp:include page="inc/CSS_JS_global.jsp"/>
 </head>
 <header>
     <%-- Inclusion de la NavBar --%>
-    <jsp:include page="inc/NavBar_header.jsp"></jsp:include>
+    <jsp:include page="inc/NavBar_header.jsp"/>
     <script>
         function forgottenPass(){
             var emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;

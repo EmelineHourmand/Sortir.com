@@ -66,6 +66,15 @@ public class LoginServlet extends HttpServlet {
 
         if(request.getSession().getAttribute("user") != null){
             // Utilisateur déjà connecté (user dans session)
+
+            if(request.getParameter("signout") != null) {
+                // demande de déconnection = supression session
+                request.getSession().invalidate();
+                response.sendRedirect(request.getContextPath() + "/index");
+            }
+
+
+
             response.sendRedirect(request.getContextPath() + "/index");
         }else{
             // Utilisateur non connecté
