@@ -92,3 +92,12 @@ public class LoginServlet extends HttpServlet {
 
     }
 }
+
+
+/*Sur toutes les pages nécessitant une autentification :
+if (request.getSession().getAttribute("user") != null) {
+... code ....
+} else {
+    response.sendRedirect(request.getContextPath() + "/login");
+}*/
+
