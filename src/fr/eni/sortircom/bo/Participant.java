@@ -76,4 +76,15 @@ public class Participant implements Serializable {
         this.actif = actif;
         this.site = site;
     }
+
+    public Participant(String username, String lastname, String firstname, String phone, String mail, boolean adminstrator, String password, boolean actif) {
+        this.username = username;
+        this.lastname = lastname;
+        this.firstname = firstname;
+        this.phone = phone;
+        this.mail = mail;
+        this.adminstrator = adminstrator;
+        this.password = password;
+        this.actif = actif;
+    }
 }

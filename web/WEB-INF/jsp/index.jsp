@@ -36,8 +36,8 @@
         </div>
     </div>
 
-        <form method="post" action="${pageContext.request.contextPath}/SearchServlet">
-            <div class="row">
+    <form method="post" action="${pageContext.request.contextPath}/SearchServlet">
+        <div class="row">
             <div class="col-sm-5">
                 Filtrer les sorties <br>
 
@@ -56,17 +56,20 @@
                 </div>
 
                 Le nom de la sortie contient:
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <div class="input-group mb-3">
 
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon1">Rechercher</button>
+                    </div>
+                </div>
                 <br>
-                Entre <input data-provide="datepicker">
-                 et
+                Entre le<input type="date" class="form-control">
+                et le<input type="date" class="form-control">
 
             </div>
 
             <div class="col-sm-5">
-
 
 
             </div>
@@ -74,8 +77,8 @@
                 <!--Bouton rechercher-->
                 <input type="submit" value="Rechercher"/>
             </div>
-            </div>
-        </form>
+        </div>
+    </form>
 
 
 </div>
