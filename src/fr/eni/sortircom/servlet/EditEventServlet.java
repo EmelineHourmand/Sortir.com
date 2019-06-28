@@ -3,6 +3,7 @@ package fr.eni.sortircom.servlet;
 import fr.eni.sortircom.bll.EventManager;
 import fr.eni.sortircom.bll.exception.BLLException;
 import fr.eni.sortircom.bo.Event;
+import fr.eni.sortircom.tools.ServletTools;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,10 +33,6 @@ public class EditEventServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // TODO test event
-
-
-
         if (request.getSession().getAttribute("user") != null) {
 //            --- Connecté ---
             if (request.getParameter("id") != null) {
@@ -43,6 +40,11 @@ public class EditEventServlet extends HttpServlet {
                 long idEvent = 0;
                 try{
                     idEvent = Long.parseLong(request.getParameter("id"));
+
+
+                    // TODO test event à enlever
+                    //idEvent = ServletTools.insertEvent();
+
 
                     // Récupérer l'event correspondant à l'id
                     EventManager em = new EventManager();
