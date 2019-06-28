@@ -37,9 +37,11 @@
     </div>
 
     <form method="post" action="${pageContext.request.contextPath}/SearchServlet">
+        Filtrer les sorties <br>
         <div class="row">
-            <div class="col-sm-5">
-                Filtrer les sorties <br>
+
+            <div class="col-sm-5 card py-5">
+
 
                 <div class="dropdown dropright">
                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
@@ -69,7 +71,36 @@
 
             </div>
 
-            <div class="col-sm-5">
+            <div class="col-sm-5 card py-5">
+
+                <%--check-box Organisateur?--%>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="organistor">
+                    <label class="form-check-label" for="defaultCheck1">
+                        Sorties dont je suis l'organisateur/trice
+                    </label>
+                </div>
+                <%--check-box inscrit?--%>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="singnedUp">
+                    <label class="form-check-label" for="defaultCheck1">
+                        Sorties auxquelles je suis inscrit/e
+                    </label>
+                </div>
+                <%--check-box pas inscrit?--%>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="notSignedUp">
+                    <label class="form-check-label" for="defaultCheck1">
+                        Sorties auxquelles je ne suis pas inscrit/e
+                    </label>
+                </div>
+                <%--check-box Sortie passée?--%>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="passedEvent">
+                    <label class="form-check-label" for="defaultCheck1">
+                        Sorties passées
+                    </label>
+                </div>
 
 
             </div>
