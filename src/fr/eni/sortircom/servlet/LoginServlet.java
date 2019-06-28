@@ -18,19 +18,19 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String email = request.getParameter("email");
+        String login = request.getParameter("login");
         String password = request.getParameter("password");
-        String remembreMe = request.getParameter("remembreMe");
+        String rememberMe = request.getParameter("rememberMe");
 
         ParticipantManager pm = new ParticipantManager();
         Participant user = null;
 
 
         try {
-            user = pm.login(email, password);
+            user = pm.login(login, password);
             // Login mdp +++ OK +++
-            // Ajout du userEmail en cookies si remembreMe est coché
-            if (remembreMe != null){
+            // Ajout du userEmail en cookies si rememberMe est coché
+            if (rememberMe != null){
                 // Ajout cookie
                 Cookie userCookie = new Cookie("userEmail", ""+user.getMail());
                 userCookie.setMaxAge(1054456406);
@@ -71,10 +71,11 @@ public class LoginServlet extends HttpServlet {
             // Utilisateur non connecté
             String userEmail = ServletTools.getCookieValue(request,"userEmail");
             if(userEmail != null){
-                // Cookies userEmail existe chargé les données email & remembreMe
+                // Cookies userEmail existe chargé les données email & rememberMe
                 request.setAttribute("email", userEmail);
-                request.setAttribute("remembreMe", "on");
+                request.setAttribute("rememberMe", "on");
             }
+            request.setAttribute("navType", "login");
             request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp").forward(request, response);
         }
 
