@@ -62,7 +62,7 @@
 
             <%--Se déconnecter--%>
             <li class="nav-item h5">
-                <a class="nav-link" href="${pageContext.request.contextPath}/login">Se déconnecter</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/login?signout">Se déconnecter</a>
             </li>
 
         </ul>
