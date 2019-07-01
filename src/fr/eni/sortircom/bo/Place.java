@@ -59,4 +59,17 @@ public class Place implements Serializable {
         this.city = city;
     }
 
+    /**
+     *
+     * @param name
+     * @param street
+     * @param latitude
+     * @param longitude
+     */
+    public Place(String name, String street, float latitude, float longitude) {
+        this.name = name;
+        this.street = street;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 }

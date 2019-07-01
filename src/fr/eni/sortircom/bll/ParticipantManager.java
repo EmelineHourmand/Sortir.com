@@ -79,6 +79,7 @@ public class ParticipantManager {
 
         try {
             participant = participantDAO.checkByUserLogin(login, password);
+            System.out.println(participant);
             if (participant == null) {
                 bllException.addErreur(CodesErreursBLL.SIGNIN_WRONG_IDENTIFICATION_ERROR);
             }
@@ -132,7 +133,7 @@ public class ParticipantManager {
         checkParticipant(participant, bllException);
         if(!bllException.hasErrors()) {
             try {
-                participantDAO.update(participant);
+                participantDAO.update(participant.getIdParticipant());
             } catch (DALException e) {
                 bllException.addSuppressed(e);
                 System.out.println(bllException.errorsToString());
@@ -209,27 +210,27 @@ public class ParticipantManager {
         if(mail == null || mail.trim().length() == 0 ) {
             bllException.addErreur(CodesErreursBLL.RULE_PARTICIPANT_EMAIL_EMPTY_ERROR);
         } else {
-            try {
-               if(DAOFactory.getParticipantDAO().checkByEmail(mail) != 0) {
+            /*try {
+               /if(DAOFactory.getParticipantDAO().checkByEmail(mail) != 0) {
                     bllException.addErreur(CodesErreursBLL.RULE_PARTICIPANT_EMAIL_UNIQUE_ERROR);
-                } else {
+                } else {*/
                     // Si pattern ne correspond pas a la règle
                     if (!mail.matches(EMAIL_PATTERN)) {
                         bllException.addErreur(CodesErreursBLL.RULE_PARTICIPANT_EMAIL_FORMAT_INVALID_ERROR);
                     }
-                }
+                /*}
             } catch (DALException e) {
                 e.printStackTrace();
                 bllException.addSuppressed(e);
                 bllException.addErreur(CodesErreursBLL.PARTICIPANT_CANT_CHECK_EMAIL_UNIQUE_ERROR);
-            }
+            }*/
         }
 
         // PSEUDO
         if(username == null || username.trim().length() == 0 ) {
             bllException.addErreur(CodesErreursBLL.RULE_PARTICIPANT_USERNAME_EMPTY_ERROR);
         } else {
-            try {
+            /*try {
                 if(DAOFactory.getParticipantDAO().checkByUsername(username) != 0) {
                     bllException.addErreur(CodesErreursBLL.PARTICIPANT_CANT_CHECK_USERNAME_UNIQUE_ERROR);
                 }
@@ -237,7 +238,7 @@ public class ParticipantManager {
                 e.printStackTrace();
                 bllException.addSuppressed(e);
                 bllException.addErreur(CodesErreursBLL.PARTICIPANT_CANT_CHECK_USERNAME_UNIQUE_ERROR);
-            }
+            }*/
         }
     }
 }

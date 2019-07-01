@@ -19,7 +19,7 @@ public class Participant implements Serializable {
     @Column(name = "id_participant")
     private Long idParticipant;
 
-    @Column(name = "username", length = 50, unique = true, nullable = false)
+    @Column(name = "username", length = 50, nullable = false)
     private String username;
 
     @Column(name = "lastname", length = 50, nullable = false)
@@ -31,7 +31,7 @@ public class Participant implements Serializable {
     @Column(name = "phone", length = 15)
     private String phone;
 
-    @Column(name = "mail", length = 50, unique = true, nullable = false)
+    @Column(name = "mail", length = 50, nullable = false)
     private String mail;
 
     @Column(name = "administrator", nullable = false)

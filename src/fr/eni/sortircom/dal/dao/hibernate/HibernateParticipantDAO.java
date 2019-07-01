@@ -42,10 +42,11 @@ public class HibernateParticipantDAO implements ParticipantDAO {
     }
 
     @Override
-    public void update(Participant participant) throws DALException {
+    public void update(Long id) {
         Session session = ConnectionProvider.getConnection();
+        Participant participant = (Participant) session.get(Participant.class, id);
         session.beginTransaction();
-        session.saveOrUpdate(participant);
+        session.merge(participant);
         session.getTransaction().commit();
     }
 

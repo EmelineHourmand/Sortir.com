@@ -17,7 +17,7 @@ public interface ParticipantDAO {
 
     Participant selectById(Long id) throws DALException;
 
-    void update(Participant participant) throws DALException;
+    void update(Long id) throws DALException;
 
     void delete(Long id) throws DALException;
 

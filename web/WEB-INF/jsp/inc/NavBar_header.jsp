@@ -57,7 +57,7 @@
 
             <%--Mon Profil--%>
             <li class="nav-item h5">
-                <a class="nav-link" href="${pageContext.request.contextPath}/profil">Mon Profil</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/profile">Mon Profil</a>
             </li>
 
             <%--Se déconnecter--%>
