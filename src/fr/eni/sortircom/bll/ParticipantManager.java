@@ -52,9 +52,10 @@ public class ParticipantManager {
 
     /**
      * Vérifie le match entre email et password donc que le participant est bien enregistré.
+     * Retourne le Participant si il existe bien en BDD
      * @param email
      * @param password
-     * @return le Participant si il existe bien en BDD
+     * @return Participant | BLLException
      * @throws BLLException
      */
     public Participant login(String email, String password) throws BLLException {

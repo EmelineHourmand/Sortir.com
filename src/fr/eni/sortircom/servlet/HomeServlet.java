@@ -24,10 +24,15 @@ public class HomeServlet extends javax.servlet.http.HttpServlet {
 
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
 
+        if (request.getSession().getAttribute("user") != null) {
+//          ... code ....
+        } else {
+            response.sendRedirect(request.getContextPath() + "/login");
+        }
     }
 
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-        //TODO test connecté
+
         if (request.getSession().getAttribute("user") != null) {
             SiteManager s = new SiteManager();
             List<Site> listeSite = null;

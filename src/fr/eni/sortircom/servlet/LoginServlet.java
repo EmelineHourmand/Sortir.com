@@ -64,6 +64,7 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
+
         if(request.getSession().getAttribute("user") != null){
             // Utilisateur déjà connecté (user dans session)
 
@@ -92,3 +93,12 @@ public class LoginServlet extends HttpServlet {
 
     }
 }
+
+
+/*Sur toutes les pages nécessitant une autentification :
+if (request.getSession().getAttribute("user") != null) {
+... code ....
+} else {
+    response.sendRedirect(request.getContextPath() + "/login");
+}*/
+
