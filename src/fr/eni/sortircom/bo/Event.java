@@ -26,8 +26,8 @@ public class Event implements Serializable {
     @Column(name = "event_beginning", nullable = false)
     private LocalDateTime eventBeginning;
 
-    @Column(name = "duration")
-    private LocalDateTime duration;
+    @Column(name = "event_end")
+    private LocalDateTime eventEnd;
 
     @Column(name = "registration_limit", nullable = false)
     private LocalDateTime registrationLimit;
@@ -39,19 +39,19 @@ public class Event implements Serializable {
     @Type(type = "text")
     private String description;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_place", nullable = false)
     private Place place;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_state", nullable = false)
     private State state;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_site", nullable = false)
     private Site site;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_organizer", nullable = false)
     private Participant organizer;
 
@@ -64,7 +64,7 @@ public class Event implements Serializable {
      * Constructor
      * @param name
      * @param eventBeginning
-     * @param duration
+     * @param eventEnd
      * @param registrationLimit
      * @param maxRegistration
      * @param description
@@ -73,11 +73,11 @@ public class Event implements Serializable {
      * @param site
      * @param organizer
      */
-    public Event(String name, LocalDateTime eventBeginning, LocalDateTime duration, LocalDateTime registrationLimit,
+    public Event(String name, LocalDateTime eventBeginning, LocalDateTime eventEnd, LocalDateTime registrationLimit,
                  Integer maxRegistration, String description, Place place, State state, Site site, Participant organizer) {
         this.name = name;
         this.eventBeginning = eventBeginning;
-        this.duration = duration;
+        this.eventEnd = eventEnd;
         this.registrationLimit = registrationLimit;
         this.maxRegistration = maxRegistration;
         this.description = description;
