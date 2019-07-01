@@ -1,12 +1,14 @@
 package fr.eni.sortircom.bll;
 
 import fr.eni.sortircom.bll.exception.BLLException;
+import fr.eni.sortircom.bll.exception.CodesErreursBLL;
 import fr.eni.sortircom.bo.Site;
 import fr.eni.sortircom.dal.dao.DAOFactory;
 import fr.eni.sortircom.dal.dao.SiteDAO;
 import fr.eni.sortircom.dal.exception.DALException;
 
 import java.util.List;
+import java.util.concurrent.BlockingDeque;
 
 /**
  * @author Emeline Hourmand
@@ -25,8 +27,21 @@ public class SiteManager {
      * @return
      * @throws BLLException
      */
-    public Site insertSite() throws BLLException {
-        return null;
+    public void insertSite(Site site) throws BLLException {
+        BLLException bllException = new BLLException();
+        checkSite(site, bllException);
+        if(!bllException.hasErrors()) {
+            try {
+                siteDAO.insert(site);
+            } catch (DALException e) {
+                bllException.addSuppressed(e);
+                System.out.println(bllException.errorsToString());
+                throw bllException;
+            }
+        } else {
+            System.out.println(bllException.errorsToString());
+            throw bllException;
+        }
     }
 
     /**
@@ -67,14 +82,17 @@ public class SiteManager {
      */
     public void updateSite(Site site) throws BLLException {
         BLLException bllException = new BLLException();
-        if(checkSite(site)){
+        checkSite(site, bllException);
+        if(!bllException.hasErrors()) {
+            try {
+                siteDAO.update(site);
+            } catch (DALException e) {
+                bllException.addSuppressed(e);
+                System.out.println(bllException.errorsToString());
+                throw bllException;
+            }
+        } else {
             System.out.println(bllException.errorsToString());
-            throw bllException;
-        }
-        try {
-            siteDAO.update(site);
-        }catch (DALException e) {
-            bllException.addSuppressed(e);
             throw bllException;
         }
     }
@@ -99,7 +117,17 @@ public class SiteManager {
      * @param site
      * @return
      */
-    public static boolean checkSite(Site site){
-        return false;
+    public static void checkSite(Site site, BLLException bllException){
+        if(site == null) {
+            bllException.addErreur(CodesErreursBLL.CITY_NULL_ERROR);
+        } else {
+
+            // NOM
+            if (site.getName() == null || site.getName().trim().length() == 0) {
+                bllException.addErreur(CodesErreursBLL.RULE_SITE_NAME_EMPTY_ERROR);
+            } else if (site.getName().length() > 50) {
+                bllException.addErreur(CodesErreursBLL.RULE_SITE_NAME_FORMAT_INVALID_ERROR);
+            }
+        }
     }
 }

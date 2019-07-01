@@ -1,5 +1,6 @@
 package fr.eni.sortircom.dal.dao.hibernate;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import fr.eni.sortircom.bo.Participant;
 import fr.eni.sortircom.dal.ConnectionProvider;
@@ -66,5 +67,31 @@ public class HibernateParticipantDAO implements ParticipantDAO {
         return participants.size();
     }
 
+    @Override
+    public int checkByUsername(String username) throws DALException {
+        Session session = ConnectionProvider.getConnection();
+        Query q = session.createQuery("FROM Participant WHERE username=:username");
+        q.setParameter("username", username);
+        List<Participant> participants = q.getResultList();
+        return participants.size();
+    }
 
+    @Override
+    public Participant checkByUserLogin(String login, String password) throws DALException {
+        Participant participant = null;
+        String hql = "FROM Participant WHERE "
+                + "password = \'" + password + "\' AND "
+                + " (username = \'" + login + "\' OR mail = \'" + login + "\')" ;
+        try(Session session = ConnectionProvider.getConnection()){
+            Query query = session.createQuery(hql);
+            List<Participant> results = query.getResultList();
+            if(!results.isEmpty()) {
+                participant = results.get(0);
+            }
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            throw new DALException(e.getMessage(), e);
+        }
+        return participant;
+    }
 }

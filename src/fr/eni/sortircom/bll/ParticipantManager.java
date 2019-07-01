@@ -38,29 +38,57 @@ public class ParticipantManager {
      * - unicité de l'email
      */
     public void insertParticipant(Participant participant) throws BLLException {
+
         BLLException bllException = new BLLException();
-        try {
-            checkMail(participant.getMail(), bllException);
-            checkParticipant(participant, bllException);
-            participantDAO.insert(participant);
-        } catch (DALException e) {
-            bllException.addSuppressed(e);
+        checkParticipant(participant, bllException);
+        if(!bllException.hasErrors()) {
+            try {
+                participantDAO.insert(participant);
+            } catch (DALException e) {
+                bllException.addSuppressed(e);
+                System.out.println(bllException.errorsToString());
+                throw bllException;
+            }
+        } else {
+            System.out.println(bllException.errorsToString());
             throw bllException;
         }
     }
 
-
     /**
      * Vérifie le match entre email et password donc que le participant est bien enregistré.
      * Retourne le Participant si il existe bien en BDD
-     * @param email
+     * @param login
      * @param password
      * @return Participant | BLLException
      * @throws BLLException
      */
-    public Participant login(String email, String password) throws BLLException {
-        // TODO ceci est un bouchon de code
-        return new Participant("Jojo", "Toto", "Tata", "0123456789", "toto.tata@toto.fr", false, "134", true);
+    public Participant login(String login, String password) throws BLLException {
+        BLLException bllException = new BLLException();
+        Participant participant;
+
+        // LOGIN
+        if(login == null || login.trim().length() == 0) {
+            bllException.addErreur(CodesErreursBLL.RULE_PARTICIPANT_USERNAME_EMPTY_ERROR);
+            bllException.addErreur(CodesErreursBLL.RULE_PARTICIPANT_EMAIL_EMPTY_ERROR);
+        }
+        // PASSWORD
+        if(password == null || password.trim().length() == 0 ) {
+            bllException.addErreur(CodesErreursBLL.RULE_PARTICIPANT_PASSWORD_EMPTY_ERROR);
+        }
+
+        try {
+            participant = participantDAO.checkByUserLogin(login, password);
+            if (participant == null) {
+                bllException.addErreur(CodesErreursBLL.SIGNIN_WRONG_IDENTIFICATION_ERROR);
+            }
+        } catch (DALException e) {
+            bllException.addErreur(CodesErreursBLL.PARTICIPANT_CANT_SIGNIN_ERROR);
+            bllException.addSuppressed(e);
+            System.out.println(bllException.errorsToString());
+            throw bllException;
+        }
+        return participant;
     }
 
     /**
@@ -101,11 +129,17 @@ public class ParticipantManager {
      */
     public void updateParticpant(Participant participant) throws BLLException {
         BLLException bllException = new BLLException();
-        try {
-            checkParticipant(participant, bllException);
-            participantDAO.update(participant);
-        } catch (DALException e) {
-            bllException.addSuppressed(e);
+        checkParticipant(participant, bllException);
+        if(!bllException.hasErrors()) {
+            try {
+                participantDAO.update(participant);
+            } catch (DALException e) {
+                bllException.addSuppressed(e);
+                System.out.println(bllException.errorsToString());
+                throw bllException;
+            }
+        } else {
+            System.out.println(bllException.errorsToString());
             throw bllException;
         }
     }
@@ -136,10 +170,7 @@ public class ParticipantManager {
             bllException.addErreur(CodesErreursBLL.PARTICIPANT_NULL_ERROR);
         } else {
 
-            // EMAIL
-            if(participant.getMail() == null || participant.getMail().trim().length() == 0 ) {
-                bllException.addErreur(CodesErreursBLL.RULE_PARTICIPANT_EMAIL_EMPTY_ERROR);
-            }
+             checkMailUsername(participant.getMail(), participant.getUsername(), bllException);
 
             // NOM
             if(participant.getLastname() == null || participant.getLastname().trim().length() == 0) {
@@ -172,7 +203,9 @@ public class ParticipantManager {
      * @param mail
      * @return
      */
-    private static void checkMail(String mail, BLLException bllException) {
+    private static void checkMailUsername(String mail, String username, BLLException bllException) {
+
+        // MAIL
         if(mail == null || mail.trim().length() == 0 ) {
             bllException.addErreur(CodesErreursBLL.RULE_PARTICIPANT_EMAIL_EMPTY_ERROR);
         } else {
@@ -189,6 +222,21 @@ public class ParticipantManager {
                 e.printStackTrace();
                 bllException.addSuppressed(e);
                 bllException.addErreur(CodesErreursBLL.PARTICIPANT_CANT_CHECK_EMAIL_UNIQUE_ERROR);
+            }
+        }
+
+        // PSEUDO
+        if(username == null || username.trim().length() == 0 ) {
+            bllException.addErreur(CodesErreursBLL.RULE_PARTICIPANT_USERNAME_EMPTY_ERROR);
+        } else {
+            try {
+                if(DAOFactory.getParticipantDAO().checkByUsername(username) != 0) {
+                    bllException.addErreur(CodesErreursBLL.PARTICIPANT_CANT_CHECK_USERNAME_UNIQUE_ERROR);
+                }
+            } catch (DALException e) {
+                e.printStackTrace();
+                bllException.addSuppressed(e);
+                bllException.addErreur(CodesErreursBLL.PARTICIPANT_CANT_CHECK_USERNAME_UNIQUE_ERROR);
             }
         }
     }

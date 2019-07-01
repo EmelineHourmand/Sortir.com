@@ -1,11 +1,13 @@
 package fr.eni.sortircom.bll;
 
 import fr.eni.sortircom.bll.exception.BLLException;
+import fr.eni.sortircom.bll.exception.CodesErreursBLL;
 import fr.eni.sortircom.bo.Event;
 import fr.eni.sortircom.dal.dao.DAOFactory;
 import fr.eni.sortircom.dal.dao.EventDAO;
 import fr.eni.sortircom.dal.exception.DALException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -25,10 +27,10 @@ public class EventManager {
 
     public void insertEvent(Event event) throws BLLException {
         BLLException bllException = new BLLException();
-       // checkEvent(event, bllException);
+        checkEvent(event, bllException);
         if(!bllException.hasErrors()) {
             try {
-                DAOFactory.getEventDAO().insert(event);
+                eventDAO.insert(event);
             } catch (DALException e) {
                 bllException.addSuppressed(e);
                 System.out.println(bllException.errorsToString());
@@ -38,15 +40,6 @@ public class EventManager {
             System.out.println(bllException.errorsToString());
             throw bllException;
         }
-    }
-
-    /**
-     * Cermet de verifier la validité des informations de l'event
-     *
-     * @throws BLLException
-     */
-    public static boolean checkEvent(Event event, BLLException bllException) throws BLLException {
-        return false;
     }
 
     public List<Event> selectAllEvent() throws BLLException {
@@ -70,10 +63,19 @@ public class EventManager {
     }
 
     public void updateEvent(Event event) throws  BLLException {
-        try {
-            eventDAO.update(event);
-        } catch (DALException e) {
-            e.printStackTrace();
+        BLLException bllException = new BLLException();
+        checkEvent(event, bllException);
+        if(!bllException.hasErrors()) {
+            try {
+                eventDAO.update(event);
+            } catch (DALException e) {
+                bllException.addSuppressed(e);
+                System.out.println(bllException.errorsToString());
+                throw bllException;
+            }
+        } else {
+            System.out.println(bllException.errorsToString());
+            throw bllException;
         }
     }
 
@@ -81,7 +83,53 @@ public class EventManager {
         try {
             eventDAO.delete(id);
         } catch (DALException e) {
-            e.printStackTrace();
+            BLLException bllException = new BLLException();
+            bllException.addSuppressed(e);
+            throw bllException;
+        }
+    }
+
+    /**
+     * Cermet de verifier la validité des informations de l'event
+     *
+     * @throws BLLException
+     */
+    public static void checkEvent(Event event, BLLException bllException) throws BLLException {
+        if (event == null) {
+            bllException.addErreur(CodesErreursBLL.EVENT_NULL_ERROR);
+        } else {
+            // NOM
+            if (event.getName() == null || event.getName().trim().length() == 0) {
+                bllException.addErreur(CodesErreursBLL.RULE_EVENT_NAME_EMPTY_ERROR);
+            } else if (event.getName().length() > 250) {
+                bllException.addErreur(CodesErreursBLL.RULE_EVENT_NAME_FORMAT_INVALID_ERROR);
+            }
+
+            // DESCRIPTION
+            if (event.getDescription().length() > 65535) { // 65535 est la longeur max d'un type TEXT en MySQL
+                bllException.addErreur(CodesErreursBLL.RULE_EVENT_DESCRIPTION_FORMAT_INVALID_ERROR);
+            }
+
+            // DATE DE DEBUT
+            if (event.getEventBeginning() == null || event.getEventBeginning().toString().trim().length() == 0) {
+                bllException.addErreur(CodesErreursBLL.RULE_EVENT_DATE_BEGINNING_EMPTY_ERROR);
+            } else if(event.getEventBeginning().isAfter(LocalDateTime.now())) {
+                bllException.addErreur(CodesErreursBLL.RULE_EVENT_DATE_BEGINNING_OLD_ERROR);
+            }
+
+            // DATE DE FIN
+            if (event.getEventEnd() == null || event.getEventEnd().toString().trim().length() == 0) {
+                bllException.addErreur(CodesErreursBLL.RULE_EVTN_DATE_END_EMPTY_ERROR);
+            } else if (event.getEventEnd().isBefore(LocalDateTime.now())) {
+                bllException.addErreur(CodesErreursBLL.RULE_EVENT_DATE_END_OLD_ERROR);
+            }
+
+            // DATE DE CLOTURE DES INSCRIPTIONS
+            if (event.getRegistrationLimit() != null) {
+                if (event.getRegistrationLimit().isBefore(LocalDateTime.now())) {
+                    bllException.addErreur(CodesErreursBLL.RULE_EVENT_DATE_REGISTRATION_OLD_ERROR);
+                }
+            }
         }
     }
 

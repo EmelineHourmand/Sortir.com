@@ -32,5 +32,5 @@ public class State implements Serializable {
     /**
      * Empty Constructor
      */
-    private State() {}
+    public State() {}
 }

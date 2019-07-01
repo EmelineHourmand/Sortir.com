@@ -33,7 +33,7 @@ public class Place implements Serializable {
     @Column(name = "longitude")
     private float longitude;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="id_city", nullable = false)
     private City city;
 
@@ -50,12 +50,13 @@ public class Place implements Serializable {
      * @param latitude
      * @param longitude
      */
-    public Place(String name, String street, float latitude, float longitude) {
+    public Place(String name, String street, float latitude, float longitude, City city) {
         this.idPlace = idPlace;
         this.name = name;
         this.street = street;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.city = city;
     }
 
 }

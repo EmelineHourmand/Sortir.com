@@ -1,6 +1,7 @@
 package fr.eni.sortircom.bll;
 
 import fr.eni.sortircom.bll.exception.BLLException;
+import fr.eni.sortircom.bll.exception.CodesErreursBLL;
 import fr.eni.sortircom.bo.State;
 import fr.eni.sortircom.dal.dao.DAOFactory;
 import fr.eni.sortircom.dal.dao.StateDAO;
@@ -25,8 +26,21 @@ public class StateManager {
      * @return
      * @throws BLLException
      */
-    public State insertState() throws BLLException {
-        return null;
+    public void insertState(State state) throws BLLException {
+        BLLException bllException = new BLLException();
+        checkState(state, bllException);
+        if(!bllException.hasErrors()) {
+            try {
+                stateDAO.insert(state);
+            } catch (DALException e) {
+                bllException.addSuppressed(e);
+                System.out.println(bllException.errorsToString());
+                throw bllException;
+            }
+        } else {
+            System.out.println(bllException.errorsToString());
+            throw bllException;
+        }
     }
 
     /**
@@ -67,14 +81,17 @@ public class StateManager {
      */
     public void updateState(State state) throws BLLException {
         BLLException bllException = new BLLException();
-        if(checkState(state)){
+        checkState(state, bllException);
+        if(!bllException.hasErrors()) {
+            try {
+                stateDAO.update(state);
+            } catch (DALException e) {
+                bllException.addSuppressed(e);
+                System.out.println(bllException.errorsToString());
+                throw bllException;
+            }
+        } else {
             System.out.println(bllException.errorsToString());
-            throw bllException;
-        }
-        try {
-            stateDAO.update(state);
-        }catch (DALException e) {
-            bllException.addSuppressed(e);
             throw bllException;
         }
     }
@@ -99,7 +116,16 @@ public class StateManager {
      * @param state
      * @return
      */
-    public static boolean checkState(State state){
-        return false;
+    public static void checkState(State state, BLLException bllException){
+        if(state == null) {
+            bllException.addErreur(CodesErreursBLL.CITY_NULL_ERROR);
+        } else {
+            // NOM
+            if(state.getLabel() == null || state.getLabel().trim().length() == 0 ) {
+                bllException.addErreur(CodesErreursBLL.RULE_STATE_LABEL_EMPTY_ERROR);
+            } else if(state.getLabel().length() > 50) {
+                bllException.addErreur(CodesErreursBLL.RULE_STATE_LABEL_FORMAT_INVALID_ERROR);
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 package fr.eni.sortircom.bll;
 
 import fr.eni.sortircom.bll.exception.BLLException;
+import fr.eni.sortircom.bll.exception.CodesErreursBLL;
 import fr.eni.sortircom.bo.City;
 import fr.eni.sortircom.dal.dao.CityDAO;
 import fr.eni.sortircom.dal.dao.DAOFactory;
@@ -28,49 +29,25 @@ public class CityManager {
     /**
      * Verification et insertion d'un CITY
      * @param city
+     * @return
      * @throws BLLException
      */
     public void insertCity(City city) throws BLLException {
         BLLException bllException = new BLLException();
-        if(checkCity(city)){
+        checkCity(city, bllException);
+        if(!bllException.hasErrors()) {
+            try {
+                cityDAO.insert(city);
+            } catch (DALException e) {
+                bllException.addSuppressed(e);
+                System.out.println(bllException.errorsToString());
+                throw bllException;
+            }
+        } else {
             System.out.println(bllException.errorsToString());
-            throw bllException;
-        }
-        try {
-            cityDAO.insert(city);
-        }catch (DALException e) {
-            //e.printStackTrace();
-            bllException.addSuppressed(e);
             throw bllException;
         }
     }
-
-
-
- /*   /**
-     * Verification et insertion d'un CITY
-     * @param name
-     * @param postalCode
-     * @return
-     * @throws BLLException
-     */
-  /*  public City insertCity(String name, String postalCode) throws BLLException {
-        BLLException bllException = new BLLException();
-        City city = new City(name, postalCode);
-        if(checkCity(city)){
-            System.out.println(bllException.errorsToString());
-            throw bllException;
-        }
-        try {
-            cityDAO.insert(city);
-        }catch (DALException e) {
-            //e.printStackTrace();
-            bllException.addSuppressed(e);
-            throw bllException;
-        }
-        return city;
-    }*/
-
 
     /**
      * Selection de tout les CITY en BDD
@@ -110,14 +87,17 @@ public class CityManager {
      */
     public void updateCity(City city) throws BLLException {
         BLLException bllException = new BLLException();
-        if(checkCity(city)){
+        checkCity(city, bllException);
+        if(!bllException.hasErrors()) {
+            try {
+                cityDAO.update(city);
+            } catch (DALException e) {
+                bllException.addSuppressed(e);
+                System.out.println(bllException.errorsToString());
+                throw bllException;
+            }
+        } else {
             System.out.println(bllException.errorsToString());
-            throw bllException;
-        }
-        try {
-            cityDAO.update(city);
-        }catch (DALException e) {
-            bllException.addSuppressed(e);
             throw bllException;
         }
     }
@@ -142,8 +122,24 @@ public class CityManager {
      * @param city
      * @return
      */
-    public static boolean checkCity(City city){
-        return false;
+    public static void checkCity(City city, BLLException bllException){
+        if(city == null) {
+            bllException.addErreur(CodesErreursBLL.CITY_NULL_ERROR);
+        } else {
+            // NOM
+            if(city.getName() == null || city.getName().trim().length() == 0 ) {
+                bllException.addErreur(CodesErreursBLL.RULE_CITY_NAME_EMPTY_ERROR);
+            } else if(city.getName().length() > 50) {
+                bllException.addErreur(CodesErreursBLL.RULE_CITY_NAME_FORMAT_INVALID_ERROR);
+            }
+
+            // CODE POSTAL
+            if (city.getPostalCode() == null || city.getPostalCode().trim().length() == 0) {
+                bllException.addErreur(CodesErreursBLL.RULE_CITY_POSTAL_CODE_EMPTY_ERROR);
+            } else if (city.getPostalCode().length() > 5) {
+                bllException.addErreur(CodesErreursBLL.RULE_CITY_POSTAL_CODE_INVALID_ERROR);
+            }
+        }
     }
 }
 
