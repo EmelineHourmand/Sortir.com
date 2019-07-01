@@ -68,7 +68,7 @@ public class HibernateParticipantDAO implements ParticipantDAO {
     }
 
     @Override
-    public int checkByUsername(String username) throws DALException {
+    public int checkByUsername(String username) {
         Session session = ConnectionProvider.getConnection();
         Query q = session.createQuery("FROM Participant WHERE username=:username");
         q.setParameter("username", username);
@@ -87,8 +87,9 @@ public class HibernateParticipantDAO implements ParticipantDAO {
             List<Participant> results = query.getResultList();
             if(!results.isEmpty()) {
                 participant = results.get(0);
+            } else {
+                throw new DALException("DAL - Information de connexion incorrecte");
             }
-            // TODO si results empty = pas d'exception levé !
         } catch (HibernateException e) {
             e.printStackTrace();
             throw new DALException(e.getMessage(), e);
