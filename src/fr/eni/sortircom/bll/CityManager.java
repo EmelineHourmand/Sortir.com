@@ -27,12 +27,34 @@ public class CityManager {
 
     /**
      * Verification et insertion d'un CITY
+     * @param city
+     * @throws BLLException
+     */
+    public void insertCity(City city) throws BLLException {
+        BLLException bllException = new BLLException();
+        if(checkCity(city)){
+            System.out.println(bllException.errorsToString());
+            throw bllException;
+        }
+        try {
+            cityDAO.insert(city);
+        }catch (DALException e) {
+            //e.printStackTrace();
+            bllException.addSuppressed(e);
+            throw bllException;
+        }
+    }
+
+
+
+ /*   /**
+     * Verification et insertion d'un CITY
      * @param name
      * @param postalCode
      * @return
      * @throws BLLException
      */
-    public City insertCity(String name, String postalCode) throws BLLException {
+  /*  public City insertCity(String name, String postalCode) throws BLLException {
         BLLException bllException = new BLLException();
         City city = new City(name, postalCode);
         if(checkCity(city)){
@@ -47,7 +69,8 @@ public class CityManager {
             throw bllException;
         }
         return city;
-    }
+    }*/
+
 
     /**
      * Selection de tout les CITY en BDD

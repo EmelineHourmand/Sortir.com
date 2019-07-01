@@ -21,16 +21,12 @@ public class PlaceManager {
         placeDAO = DAOFactory.getPlaceDAO();
     }
 
-    public Place insertPlace(String name, String street, float latitude, float longitude){
+    public void insertPlace(Place place){
         try {
-            Place place = new Place( name, street, latitude, longitude);
-
             placeDAO.insert(place);
-
         }catch (DALException e) {
             e.printStackTrace();
         }
-        return null;
     }
 
     public List<Place> selectAllEvent() throws DALException {
