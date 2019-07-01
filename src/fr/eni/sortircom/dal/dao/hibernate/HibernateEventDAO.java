@@ -60,4 +60,9 @@ public class HibernateEventDAO implements EventDAO {
         session.delete(event);
         session.getTransaction().commit();
     }
+
+//    @Override
+//    public List<Event> readFromAffichageEvent(AffichageEvent ae, long id_participant){
+//
+//    }
 }

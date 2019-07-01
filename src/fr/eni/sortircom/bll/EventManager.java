@@ -133,4 +133,8 @@ public class EventManager {
         }
     }
 
+//    public List<Event> fetchByAffichageEvent(AffichageEvent ae, long id_participant){
+//        return eventDAO.readFromAffichageEvent(ae, id_participant);
+//    }
+
 }

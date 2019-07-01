@@ -42,30 +42,27 @@
 
             <div class="col-sm-5 card py-5">
 
-
+                <label for="site">Choix du site:</label>
                 <div class="dropdown dropright">
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="site">
-                        Site
-                    </a>
-
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <select class="custom-select" name="site" id="site">
                         <c:forEach var="Site" items="${listeSite}">
                             <option class="dropdown-item" value="${Site.getName()}"
                                     name="site">${Site.getName()}</option>
                         </c:forEach>
-                    </div>
-                </div>
-
-                Le nom de la sortie contient:
-                <div class="input-group mb-3">
-
-                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon1">Rechercher</button>
-                    </div>
+                    </select>
                 </div>
                 <br>
+
+                <%--formulaire de recherche--%>
+                <%--                <label for="site"> Le nom de la sortie contient:</label>--%>
+
+                <div class="input-group mb-3">
+                    <input class="form-control" type="search" id="site-search" name="q"
+                           placeholder="Le nom de la sortie contient:" aria-label="Search">
+                </div>
+                <br>
+
+
                 Entre le<input type="date" class="form-control">
                 et le<input type="date" class="form-control">
 
@@ -110,6 +107,42 @@
             </div>
         </div>
     </form>
+
+    <%--    Affichage tableau--%>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Nom de la sortie</th>
+            <th scope="col">Date de la sortie</th>
+            <th scope="col">Clôture</th>
+            <th scope="col">inscrits/places</th>
+            <th scope="col">Etat</th>
+            <th scope="col">Inscrit</th>
+            <th scope="col">Organisateur</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+
+<%--        <c:forEach var="Site" items="${listeSite}">--%>
+<%--            <option class="dropdown-item" value="${Site.getName()}"--%>
+<%--                    name="site">${Site.getName()}</option>--%>
+<%--        </c:forEach>--%>
+        <c:forEach var="Event" items="${listeEvent}">
+            <tr>
+                <th scope="row">${Event.getName()}</th>
+                <td>${Event.getEventBeginning().getDayOfMonth()}/${Event.getEventBeginning().getMonth()}/${Event.getEventBeginning().getYear()}</td>
+                <td>${Event.getRegistrationLimit().getDayOfMonth()}/${Event.getEventBeginning().getMonth()}/${Event.getEventBeginning().getYear()}</td>
+                <td>?/?</td>
+                <td>${Event.getState().getLabel()}</td>
+                <td>?</td>
+                <td><a href="mailto:${Event.getOrganizer().getMail()}">${Event.getOrganizer().getUsername()}</a></td>
+                <td>${actions}</td>
+            </tr>
+        </c:forEach>
+
+        </tbody>
+    </table>
 
 
 </div>

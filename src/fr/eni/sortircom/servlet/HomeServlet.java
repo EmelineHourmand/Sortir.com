@@ -1,6 +1,9 @@
 package fr.eni.sortircom.servlet;
 
+import fr.eni.sortircom.bll.EventManager;
+import fr.eni.sortircom.bll.StateManager;
 import fr.eni.sortircom.bll.exception.BLLException;
+import fr.eni.sortircom.bo.Event;
 import fr.eni.sortircom.bo.Participant;
 import fr.eni.sortircom.bo.Site;
 import fr.eni.sortircom.bll.SiteManager;
@@ -34,6 +37,9 @@ public class HomeServlet extends javax.servlet.http.HttpServlet {
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
 
         if (request.getSession().getAttribute("user") != null) {
+
+
+            //Création liste Sites
             SiteManager s = new SiteManager();
             List<Site> listeSite = null;
             try {
@@ -44,10 +50,44 @@ public class HomeServlet extends javax.servlet.http.HttpServlet {
             System.out.println(listeSite);
             request.setAttribute("listeSite", listeSite);
 
+
+            //Création liste Events
+
+            EventManager ev = new EventManager();
+            List<Event> listeEvent = null;
+            try {
+                listeEvent = ev.selectAllEvent();
+            } catch (BLLException e) {
+                e.printStackTrace();
+            }
+            System.out.println(listeEvent);
+            request.setAttribute("listeEvent", listeEvent);
+
             Date aujourdhui = new Date();
-            DateFormat shortDateFormat = new SimpleDateFormat("dd-MM-yy");
+            DateFormat shortDateFormat = new SimpleDateFormat("dd/MM/yy");
             String today = shortDateFormat.format(aujourdhui);
             request.setAttribute("today", today);
+
+            //Actions
+
+            // Modifier
+            String actions = "";
+
+            for (Event ee : listeEvent){
+                Participant userLoop = (Participant)request.getSession().getAttribute("user");
+                if ((ee.getState().getLabel().equals("Créée"))&&(userLoop.getIdParticipant().equals(ee.getOrganizer()) )){
+                    actions += "<a href='${pageContext.request.contextPath}/EditEventServlet'></a>";
+                    System.out.println(actions);
+                }
+                else {
+                    actions += "pas matché";
+                    System.out.println("pas matché");
+                }
+            }
+
+request.setAttribute("actions", actions);
+            request.setAttribute("navType", "index");
+
             request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
         } else {
             response.sendRedirect(request.getContextPath() + "/login");
