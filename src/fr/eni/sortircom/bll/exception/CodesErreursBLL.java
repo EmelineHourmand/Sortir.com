@@ -66,14 +66,14 @@ public abstract class CodesErreursBLL {
 
 
 // Regles : CONTRAINTES UNIQUES
-// codes : 202xx
+// codes : 220xx
 
-	public static final int RULE_PARTICIPANT_EMAIL_UNIQUE_ERROR = 20200;
+	public static final int RULE_PARTICIPANT_EMAIL_UNIQUE_ERROR = 22000;
 
 // Regles : SIGNIN : CORRESPONDANCE LOGIN & MDP
-// codes : 203xx
+// codes : 230xx
 
-	public static final int SIGNIN_WRONG_IDENTIFICATION_ERROR = 20300;
+	public static final int SIGNIN_WRONG_IDENTIFICATION_ERROR = 23000;
 
 // Regles : OTHER (Login invalide, erreur BDD / réseau ...)
 // codes : 209xx
