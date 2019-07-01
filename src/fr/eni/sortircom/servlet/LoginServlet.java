@@ -35,7 +35,6 @@ public class LoginServlet extends HttpServlet {
                 Cookie userCookie = new Cookie("userEmail", ""+user.getMail());
                 userCookie.setMaxAge(1054456406);
                 response.addCookie(userCookie);
-
             }else{
                 // Invalide la cookie
                 Cookie userCookie = new Cookie("userEmail", "");
@@ -46,36 +45,26 @@ public class LoginServlet extends HttpServlet {
             // Ajout du user connecté dans la session
 //            request.getSession().setAttribute("userId", user.getIdParticipant());
             request.getSession().setAttribute("user", user);
+            response.sendRedirect(request.getContextPath() + "/index");
 
         } catch (BLLException e) {
             // Login mdp --- KO ---
             System.err.println(e.getMessage());
             // Retourne à la page de connection
-            request.setAttribute("errLogin", "");
+            request.setAttribute("errLogin", "oups");
             request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp").forward(request, response);
         }
-
-
-//        Redirection tempo pour test
-        response.sendRedirect(request.getContextPath() + "/index");
 //        response.getWriter().append("Post - Served at: ").append(request.getContextPath());
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
-
         if(request.getSession().getAttribute("user") != null){
             // Utilisateur déjà connecté (user dans session)
-
             if(request.getParameter("signout") != null) {
-                // demande de déconnection = supression session
+                // demande de déconnexion = supression session
                 request.getSession().invalidate();
-                response.sendRedirect(request.getContextPath() + "/index");
             }
-
-
-
             response.sendRedirect(request.getContextPath() + "/index");
         }else{
             // Utilisateur non connecté
@@ -85,12 +74,11 @@ public class LoginServlet extends HttpServlet {
                 request.setAttribute("email", userEmail);
                 request.setAttribute("rememberMe", "on");
             }
+            // Si erreur Login errLogin revient du forward du post.
             request.setAttribute("navType", "login");
             request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp").forward(request, response);
         }
-
         //response.getWriter().append("Served at: ").append(request.getContextPath());
-
     }
 }
 

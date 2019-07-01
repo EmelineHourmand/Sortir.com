@@ -5,6 +5,7 @@
   Time: 14:28
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -33,17 +34,24 @@
 </header>
 <body>
 
+<%--<c:set var="errLogin" value='oups' />--%>
+    <c:if test="${!empty errLogin}">
+        <div class="alert alert-danger text-center" role="alert">
+            Informations de connexion incorrecte .
+        </div>
+    </c:if>
+
     <div class="container">
         <div class="row">
             <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
                 <div class="card my-5">
                     <div class="card-body">
-                        <h5 class="card-title text-center text-uppercase">Connexion</h5>
+                        <h4 class="card-title text-center text-uppercase">Connexion</h4>
                         <br>
                         <%-- Formulaire de connexion --%>
                         <form name="loginForm" action="${pageContext.request.contextPath}/login" method="post">
                             <div class="form-group">
-                                <label for="inputlogin">Email :</label>
+                                <label for="inputlogin">Login :</label>
                                 <input type="text" name="login" id="inputlogin" class="form-control" placeholder="Pseudo ou Email" value="${requestScope.email}" required autofocus>
                             </div>
 

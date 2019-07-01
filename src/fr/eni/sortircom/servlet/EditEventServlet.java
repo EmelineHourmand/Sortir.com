@@ -41,11 +41,6 @@ public class EditEventServlet extends HttpServlet {
                 try{
                     idEvent = Long.parseLong(request.getParameter("id"));
 
-
-                    // TODO test event à enlever
-                    //idEvent = ServletTools.insertEvent();
-
-
                     // Récupérer l'event correspondant à l'id
                     EventManager em = new EventManager();
                     Event event = em.selectEvent(idEvent);

@@ -88,6 +88,7 @@ public class HibernateParticipantDAO implements ParticipantDAO {
             if(!results.isEmpty()) {
                 participant = results.get(0);
             }
+            // TODO si results empty = pas d'exception levé !
         } catch (HibernateException e) {
             e.printStackTrace();
             throw new DALException(e.getMessage(), e);
