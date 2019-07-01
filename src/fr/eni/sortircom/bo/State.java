@@ -18,19 +18,19 @@ public class State implements Serializable {
     @Column(name = "id_state")
     private Long idState;
 
-    @Column(name = "wording", length = 50, nullable = false)
-    private String wording;
+    @Column(name = "label", length = 50, nullable = false)
+    private String label;
 
     /**
      * Constructor
-     * @param wording
+     * @param label
      */
-    public State(String wording) {
-        this.wording = wording;
+    public State(String label) {
+        this.label = label;
     }
 
     /**
      * Empty Constructor
      */
-    public State() {}
+    private State() {}
 }

@@ -32,5 +32,5 @@ public class Site implements Serializable {
     /**
      * Empty constructor
      */
-    public Site() {}
+    private Site() {}
 }
