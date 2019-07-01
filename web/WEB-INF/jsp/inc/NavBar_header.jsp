@@ -5,13 +5,12 @@
 <jsp:include page="inc/NavBar_header.jsp"></jsp:include>
 --%>
 <%--    <nav>--%>
-
     <c:choose>
-        <c:when test="${requestScope.navType != null}">
+        <c:when test="${requestScope.navType == 'login'}">
             <%--  NavBar Logo seulement  --%>
 
         </c:when>
-        <c:when test="${requestScope.navType != null}">
+        <c:when test="${requestScope.navType == 'index'}">
             <%--  NavBar Acceuil (index) "Ville / Sites / Accueil / Mon Profil / Se déconnecter"   --%>
 
         </c:when>
@@ -20,7 +19,6 @@
 
         </c:otherwise>
     </c:choose>
-
 <%--    </nav>--%>
 
 <%--TODO revoir pourquoi le toggler ne fonctionne pas --%>
@@ -41,29 +39,36 @@
     <div class="collapse navbar-collapse flex-grow-1 text-right" id="myNavbar7">
         <ul class="navbar-nav ml-auto flex-nowrap">
 
+            <c:if test="${navType == 'index'}">
             <%--Ville--%>
             <li class="nav-item h5">
-                <a class="nav-link" href="${pageContext.request.contextPath}/ville">Ville<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/ville">Ville</a>
             </li>
-
+            </c:if>
+            <c:if test="${navType == 'index'}">
             <%--Sites--%>
             <li class="nav-item h5">
                 <a class="nav-link" href="${pageContext.request.contextPath}/sites">Sites</a>
             </li>
+            </c:if>
+            <c:if test="${empty navType || navType == 'index'}">
             <%--Accueil--%>
             <li class="nav-item h5">
                 <a class="nav-link" href="${pageContext.request.contextPath}/index">Accueil</a>
             </li>
-
+            </c:if>
+            <c:if test="${empty navType || navType == 'index'}">
             <%--Mon Profil--%>
             <li class="nav-item h5">
                 <a class="nav-link" href="${pageContext.request.contextPath}/profil">Mon Profil</a>
             </li>
-
+            </c:if>
+            <c:if test="${empty navType || navType == 'index'}">
             <%--Se déconnecter--%>
             <li class="nav-item h5">
                 <a class="nav-link" href="${pageContext.request.contextPath}/login?signout">Se déconnecter</a>
             </li>
+             </c:if>
 
         </ul>
     </div>
