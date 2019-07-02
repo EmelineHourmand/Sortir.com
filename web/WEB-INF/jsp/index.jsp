@@ -124,21 +124,44 @@
         </thead>
         <tbody>
 
-<%--        <c:forEach var="Site" items="${listeSite}">--%>
-<%--            <option class="dropdown-item" value="${Site.getName()}"--%>
-<%--                    name="site">${Site.getName()}</option>--%>
-<%--        </c:forEach>--%>
-        <c:forEach var="Event" items="${listeEvent}">
+        <%--        <c:forEach var="Site" items="${listeSite}">--%>
+        <%--            <option class="dropdown-item" value="${Site.getName()}"--%>
+        <%--                    name="site">${Site.getName()}</option>--%>
+        <%--        </c:forEach>--%>
+        <c:forEach var="event" items="${listeEvent}">
+
             <tr>
-                <th scope="row">${Event.getName()}</th>
-                <td>${Event.getEventBeginning().getDayOfMonth()}/${Event.getEventBeginning().getMonth()}/${Event.getEventBeginning().getYear()}</td>
-                <td>${Event.getRegistrationLimit().getDayOfMonth()}/${Event.getEventBeginning().getMonth()}/${Event.getEventBeginning().getYear()}</td>
+                <th scope="row">${event.getName()}</th>
+                <td>${event.getEventBeginning().getDayOfMonth()}/${event.getEventBeginning().getMonth()}/${event.getEventBeginning().getYear()}</td>
+                <td>${event.getRegistrationLimit().getDayOfMonth()}/${event.getEventBeginning().getMonth()}/${event.getEventBeginning().getYear()}</td>
                 <td>?/?</td>
-                <td>${Event.getState().getLabel()}</td>
+                <td>${event.getState().getLabel()}</td>
                 <td>?</td>
-                <td><a href="mailto:${Event.getOrganizer().getMail()}">${Event.getOrganizer().getUsername()}</a></td>
-                <td>${actions}</td>
+                <td><a href="mailto:${event.getOrganizer().getMail()}">${event.getOrganizer().getUsername()}</a></td>
+                <td>
+                //Actions
+
+                    // Modifier
+                    <c:if test="${((event.state.label == 'Créée') && (sessionScope.user.idParticipant == (event.organizer.idParticipant)))}">
+                        <a href="${pageContext.request.contextPath}/event?id=${event.idEvent}">Modifier</a>
+                        <a href="${pageContext.request.contextPath}/event?id=${event.idEvent}">Publier</a>
+                    </c:if>
+
+                    // Annuler
+                    <c:if test="${((event.state.label == 'Ouverte') && (sessionScope.user.idParticipant == (event.organizer.idParticipant)))}">
+                        <a href="${pageContext.request.contextPath}/event?id=${event.idEvent}">Annuler</a>
+                    </c:if>
+<%--                    @TODO--%>
+<%--                    Se désister--%>
+<%--                    <c:if test="${((event.state.label == 'Ouverte') && (sessionScope.user.idParticipant != (event.organizer.idParticipant)))}">--%>
+<%--                        <a href="${pageContext.request.contextPath}/event?id=${event.idEvent}">Publier</a>--%>
+<%--                    </c:if>--%>
+
+
+
+                </td>
             </tr>
+
         </c:forEach>
 
         </tbody>

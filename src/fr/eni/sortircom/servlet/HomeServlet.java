@@ -11,12 +11,12 @@ import fr.eni.sortircom.bll.SiteManager;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.text.DateFormat;
 import java.util.Locale;
-
 
 
 @WebServlet(name = "HomeServlet", urlPatterns = {"/index"})
@@ -71,21 +71,26 @@ public class HomeServlet extends javax.servlet.http.HttpServlet {
             //Actions
 
             // Modifier
-            String actions = "";
 
-            for (Event ee : listeEvent){
-                Participant userLoop = (Participant)request.getSession().getAttribute("user");
-                if ((ee.getState().getLabel().equals("Créée"))&&(userLoop.getIdParticipant().equals(ee.getOrganizer()) )){
-                    actions += "<a href='${pageContext.request.contextPath}/EditEventServlet'></a>";
-                    System.out.println(actions);
-                }
-                else {
-                    actions += "pas matché";
-                    System.out.println("pas matché");
-                }
-            }
+//                for (Event ee : listeEvent) {
+//                    List<String> actions = new ArrayList<>();
+//                    Participant userLoop = (Participant) request.getSession().getAttribute("user");
+//                    System.out.println(ee.getState().getLabel());
+//                    if (ee.getState().getLabel().equals("Créée")
+//                            && userLoop.getIdParticipant().equals(ee.getOrganizer().getIdParticipant())
+//                    ) {
+//                        actions.add( "<a href='${pageContext.request.contextPath}/EditEventServlet'>Modifier</a>");
+//                        System.out.println(actions );
+//                        request.setAttribute("actions", actions);
+//                    } else {                     actions.add(i, "pas matché");
+//                       System.out.println("pas matché");
+//                   }
+//                }
 
-request.setAttribute("actions", actions);
+
+
+
+
             request.setAttribute("navType", "index");
 
             request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
