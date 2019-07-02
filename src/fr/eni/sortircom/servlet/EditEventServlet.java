@@ -1,9 +1,11 @@
 package fr.eni.sortircom.servlet;
 
 import fr.eni.sortircom.bll.EventManager;
+import fr.eni.sortircom.bll.ParticipantManager;
+import fr.eni.sortircom.bll.SiteManager;
+import fr.eni.sortircom.bll.StateManager;
 import fr.eni.sortircom.bll.exception.BLLException;
-import fr.eni.sortircom.bo.Event;
-import fr.eni.sortircom.tools.ServletTools;
+import fr.eni.sortircom.bo.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.Duration;
-import java.time.Period;
+import java.util.List;
 
 
 /**
@@ -23,11 +25,110 @@ import java.time.Period;
 public class EditEventServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+
         if (request.getSession().getAttribute("user") != null) {
+            // ----- Connecté -----
+            if(request.getParameter("idEvent") != null){
+                // ----- id event OK -----
+                EventManager em = new EventManager();
+                StateManager stm = new StateManager();
+                SiteManager sm = new SiteManager();
+
+                try {
+                    List<State> states = stm.selectAllState();
+                    List<Site> sites = sm.selectAllSite();
+                    Event ev = em.selectEvent(Long.parseLong(request.getParameter("idEvent")));
+
+
+                    // Pour la place C'est pas top, devrait créer des nouvelle place pour les garders en mémoire (lien oneToMany)
+                    Place place = ev.getPlace();
+                    City city = place.getCity();
+                    State state = ev.getState();
+                    Site site = ev.getSite();
+/*
+                    city.setName();
+                    city.setPostalCode();
+
+                    place.setCity(city);
+                    place.setName();
+                    place.setStreet();
+                    place.setLatitude();
+                    place.setLongitude();
+
+
+
+                    ev.setName();
+                    ev.setEventBeginning();
+                    ev.setEventEnd();
+                    ev.setRegistrationLimit();
+                    ev.setMaxRegistration();
+                    ev.setDescription();
+
+
+                    ev.setPlace();
+
+*/
+
+
+                } catch (NumberFormatException | BLLException e) {
+                    // ----- Event non retrouvé ou mauvais format -----
+
+//                    e.printStackTrace();
+
+
+
+                }
+
+
+            }else{
+                // ----- id event KO -----
+
+            }
+
+
+//"eventName"
+//"dateTimeEvent"
+//"dateLimit"
+//"nbParticipant"
+//"durationMinute"
+//"description"
+//"site"
+//"placeName"
+//"street"
+//"postalCode"
+//"latitude"
+//"longitude"
+//            dateLimit
+//            2019-07-02
+//            dateTimeEvent
+//            2019-07-03T13:20:41
+//            description
+//            Sortie pub !
+//                    durationMinute
+//            300
+//            eventName
+//            Pour un pub !
+//                    latitude
+//            48.0964
+//            longitude
+//                    -1.63467
+//            nbParticipant
+//            5
+//            placeName
+//                    AVEC
+//            postalCode
+//            35000
+//            save
+//                    site
+//            CHARTRES DE BRETAGNE
+//                    street
+//            1 Rue du Breil
+
 
 
 
         } else {
+            // ----- Non connecté -----
             response.sendRedirect(request.getContextPath() + "/login");
         }
     }

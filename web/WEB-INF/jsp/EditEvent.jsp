@@ -13,11 +13,7 @@
 <head>
     <title>Title</title>
     <jsp:include page="inc/CSS_JS_global.jsp"/>
-</head>
-<header>
-    <%-- Inclusion de la NavBar --%>
-    <jsp:include page="inc/NavBar_header.jsp"/>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/editEvent.css">
+<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/editEvent.css">--%>
     <script>
         // Applied globally on all textareas with the "autoExpand" class
         $(document)
@@ -34,6 +30,10 @@
                 this.rows = minRows + rows;
             });
     </script>
+</head>
+<header>
+    <%-- Inclusion de la NavBar --%>
+    <jsp:include page="inc/NavBar_header.jsp"/>
 </header>
 <body>
 
@@ -71,6 +71,8 @@
 
 
             <form action="${pageContext.request.contextPath}/editEvent" method="post">
+
+                <input type="hidden" name="idEvent" value="${event.idEvent}" required>
 
                 <div class="form-group row">
 
@@ -125,7 +127,7 @@
                     <div class="col-lg-auto d-none d-lg-block">
                         <!-- Spacer pour le responsive -->
                     </div>
-                    <!-- Rue -->
+                    <!-- Rue --> <!-- TODO A revoir passer en texte fixe et affichage selon Liste déroulante Lieu -->
                     <div class="col-md-6 form-group row col-lg-5 mr-auto ml-auto">
                         <label for="street" class="col-sm-5  col-form-label">Rue : </label>
                         <div class="col-sm-7">
@@ -145,7 +147,7 @@
                     <div class="col-lg-auto d-none d-lg-block">
                         <!-- Spacer pour le responsive -->
                     </div>
-                    <!-- Code postal -->
+                    <!-- Code postal --> <!-- TODO A revoir passer en texte fixe et affichage selon Liste déroulante Lieu -->
                     <div class="col-md-6 form-group row col-lg-5 mr-auto ml-auto">
                         <label for="postalCode" class="col-sm-5  col-form-label">Code postal : </label>
                         <div class="col-sm-7">
@@ -165,7 +167,7 @@
                     <div class="col-lg-auto d-none d-lg-block">
                         <!-- Spacer pour le responsive -->
                     </div>
-                    <!-- Latitude -->
+                    <!-- Latitude --> <!-- TODO A revoir passer en texte fixe et affichage selon Liste déroulante Lieu -->
                     <div class="col-md-6 form-group row col-lg-5 mr-auto ml-auto">
                         <label for="latitude" class="col-sm-5  col-form-label">Latitude : </label>
                         <div class="col-sm-7">
@@ -185,7 +187,7 @@
                     <div class="col-lg-auto d-none d-lg-block">
                         <!-- Spacer pour le responsive -->
                     </div>
-                    <!-- Longitude -->
+                    <!-- Longitude --> <!-- TODO A revoir passer en texte fixe et affichage selon Liste déroulante Lieu -->
                     <div class="col-md-6 form-group row col-lg-5 mr-auto ml-auto">
                         <label for="longitude" class="col-sm-5  col-form-label">Longitude : </label>
                         <div class="col-sm-7">
@@ -200,32 +202,52 @@
                 <!-- ######### Boutons ######### -->
 
                 <br>
+
+<%--                <div class="row">--%>
+<%--                    --%>
+<%--                        <div class="col-xs-3 mx-auto text-center">--%>
+<%--                            <button type="submit" name="save" class="btn-block btn btn-secondary">Enregistrer</button>--%>
+<%--                        </div>--%>
+<%--                        <div class="col-xs-3 mx-auto text-center">--%>
+<%--                            <button type="submit" name="create" class="btn-block btn btn-secondary">Publier</button>--%>
+<%--                        </div>--%>
+<%--                        <div class="col-xs-3 mx-auto text-center">--%>
+<%--                            <button type="submit" name="create" class="btn-block btn btn-secondary">Supprimer</button>--%>
+<%--                        </div>--%>
+<%--                        <div class="col-xs-3 mx-auto text-center">--%>
+<%--                            <input type="button" value="Annuler" class="btn-block btn btn-secondary" onclick="javascript:location.href='${pageContext.request.contextPath}/encheres?sign'"/>--%>
+<%--                        </div>--%>
+<%--                    --%>
+<%--                </div>--%>
+
+
                 <div class="row">
 
                     <div class="col-xs-5 mr-auto ml-auto">
                         <div class="row center">
+
                             <div class="col-xs-6 center">
-                                <button type="submit" name="save" class="btn btn-outline-dark btn-min">Enregistrer</button>
+                                <button type="submit" name="save" class="btn btn-secondary">Enregistrer</button>
                             </div>
                             <div class="col-sm-auto d-none d-sm-block">
                                 <!-- Spacer pour le responsive -->
                             </div>
                             &nbsp;
                             <div class="col-xs-6 center">
-                                <button type="submit" name="create" class="btn btn-outline-dark btn-min">Créer</button>
+                                <button type="submit" name="create" class="btn btn-secondary">Publier</button>
                             </div>
                             <div class="col-sm-auto d-none d-sm-block">
                                 <!-- Spacer pour le responsive -->
                             </div>
                             <div class="col-xs-6 center">
-                                <button type="submit" name="create" class="btn btn-outline-dark btn-min">Créer</button>
+                                <button type="submit" name="create" class="btn btn-secondary">Supprimer</button>
                             </div>
                             <div class="col-sm-auto d-none d-sm-block">
                                 <!-- Spacer pour le responsive -->
                             </div>
 
                             <div class="col-xs-6 center">
-                                <input type="button" value="Annuler" class="btn btn-outline-dark btn-min" onclick="javascript:location.href='${pageContext.request.contextPath}/encheres?sign'"/>
+                                <input type="button" value="Annuler" class="btn btn-secondary" onclick="javascript:location.href='${pageContext.request.contextPath}/index'"/>
                             </div>
                         </div>
                     </div>
