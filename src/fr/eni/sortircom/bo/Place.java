@@ -19,7 +19,7 @@ public class Place implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_place")
-    private int idPlace;
+    private long idPlace;
 
     @Column(name = "name", length = 50, nullable = false)
     private String name;

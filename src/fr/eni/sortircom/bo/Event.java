@@ -18,7 +18,7 @@ public class Event implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_event")
-    private Long idEvent;
+    private long idEvent;
 
     @Column(name = "name", length = 250, nullable = false)
     private String name;
@@ -73,8 +73,16 @@ public class Event implements Serializable {
      * @param site
      * @param organizer
      */
-    public Event(String name, LocalDateTime eventBeginning, LocalDateTime eventEnd, LocalDateTime registrationLimit,
-                 Integer maxRegistration, String description, Place place, State state, Site site, Participant organizer) {
+    public Event(String name,
+                 LocalDateTime eventBeginning,
+                 LocalDateTime eventEnd,
+                 LocalDateTime registrationLimit,
+                 Integer maxRegistration,
+                 String description,
+                 Place place,
+                 State state,
+                 Site site,
+                 Participant organizer) {
         this.name = name;
         this.eventBeginning = eventBeginning;
         this.eventEnd = eventEnd;

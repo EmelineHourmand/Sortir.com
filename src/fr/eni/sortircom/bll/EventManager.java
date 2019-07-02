@@ -34,6 +34,7 @@ public class EventManager {
             } catch (DALException e) {
                 bllException.addSuppressed(e);
                 System.out.println(bllException.errorsToString());
+                e.printStackTrace();
                 throw bllException;
             }
         } else {
@@ -114,7 +115,8 @@ public class EventManager {
             if (event.getEventBeginning() == null || event.getEventBeginning().toString().trim().length() == 0) {
                 bllException.addErreur(CodesErreursBLL.RULE_EVENT_DATE_BEGINNING_EMPTY_ERROR);
             } else if(event.getEventBeginning().isAfter(LocalDateTime.now())) {
-                bllException.addErreur(CodesErreursBLL.RULE_EVENT_DATE_BEGINNING_OLD_ERROR);
+                // TODO test car lève une exception pas normale
+                //bllException.addErreur(CodesErreursBLL.RULE_EVENT_DATE_BEGINNING_OLD_ERROR);
             }
 
             // DATE DE FIN

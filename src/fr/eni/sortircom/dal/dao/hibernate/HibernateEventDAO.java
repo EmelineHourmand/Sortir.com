@@ -4,6 +4,7 @@ import fr.eni.sortircom.bo.Event;
 import fr.eni.sortircom.dal.ConnectionProvider;
 import fr.eni.sortircom.dal.dao.EventDAO;
 import fr.eni.sortircom.dal.exception.DALException;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -20,10 +21,14 @@ public class HibernateEventDAO implements EventDAO {
 
     @Override
     public void insert(Event event) throws DALException {
-        Session session = ConnectionProvider.getConnection();
-        session.beginTransaction();
-        session.save(event);
-        session.getTransaction().commit();
+        try(Session session = ConnectionProvider.getConnection()) {
+            session.beginTransaction();
+            session.save(event);
+            session.getTransaction().commit();
+        }catch(HibernateException e){
+            e.printStackTrace();
+            throw new DALException(e.getMessage(), e);
+        }
     }
 
     @Override
