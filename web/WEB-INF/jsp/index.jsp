@@ -63,7 +63,7 @@
                 <br>
 
 
-                Entre le<input type="date" class="form-control" name="beginning">
+                Entre le<input type="date" class="form-control" name="beginning" value="${beginning}">
                 et le<input type="date" class="form-control" name="end" value="${endValue}">
 
             </div>

@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -25,11 +27,14 @@ public class SearchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getSession().getAttribute("user") != null) {
 
+            Date aujourdhui = new Date();
+            DateFormat shortDateFormat = new SimpleDateFormat("dd/MM/yy");
+            String today = shortDateFormat.format(aujourdhui);
+            request.setAttribute("today", today);
 
             // Récupération du site selectionné
             String siteRecherche = request.getParameter("site");
             System.out.println("site recherché: " + siteRecherche);
-
 
 
             // Récupération champ de recherche avec nom de sortie
@@ -48,12 +53,32 @@ public class SearchServlet extends HttpServlet {
             System.out.println("fin: " + end);
 
             LocalDate endValue = end;
-            if (end.isBefore(beginning)){
-                endValue = beginning;
+            if (end.isBefore(beginning)) {
+                endValue = beginning.plusDays(1);
                 request.setAttribute("endValue", endValue);
-
-                request.getRequestDispatcher("/index");
+                request.setAttribute( "beginning", beginning);
+            } else {
+                request.setAttribute( "beginning", beginning);
+                request.setAttribute("envValue", endValue);
             }
+            //Création liste Events
+
+            EventManager ev = new EventManager();
+            List<Event> filtredListeEvent = null;
+            try {
+                filtredListeEvent = ev.selectAllEvent();
+
+
+
+
+
+
+
+            } catch (BLLException e) {
+                e.printStackTrace();
+            }
+
+            request.setAttribute("listeEvent", filtredListeEvent);
 
 
             //System.out.println(end.getClass().getName());
@@ -75,7 +100,8 @@ public class SearchServlet extends HttpServlet {
 
 
 
-            request.getRequestDispatcher("/index").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
+
 
         } else {
             response.sendRedirect(request.getContextPath() + "/login");
