@@ -20,7 +20,7 @@
 </header>
 <body>
 
-<%--
+
 <c:set var="eventName" 	    value="${event.name}" scope="page" />
 <c:set var="dateTimeEvent" value="${event.eventBeginning}" scope="page" />
 <c:set var="dateLimit" 	    value="${event.eventEnd}" scope="page" />
@@ -58,7 +58,7 @@ ${event.state.label}<br>
 ${event.site.name}<br>
 ${event.organizer}<br>
 
---%>
+
 
 
 

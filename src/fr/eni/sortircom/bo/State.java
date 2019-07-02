@@ -16,7 +16,7 @@ public class State implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_state")
-    private Long idState;
+    private long idState;
 
     @Column(name = "label", length = 50, nullable = false)
     private String label;

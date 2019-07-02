@@ -72,7 +72,7 @@ public class HomeServlet extends javax.servlet.http.HttpServlet {
 
             // Modifier
             String actions = "";
-
+/*
             for (Event ee : listeEvent){
                 Participant userLoop = (Participant)request.getSession().getAttribute("user");
                 if ((ee.getState().getLabel().equals("Créée"))&&(userLoop.getIdParticipant().equals(ee.getOrganizer()) )){
@@ -84,7 +84,7 @@ public class HomeServlet extends javax.servlet.http.HttpServlet {
                     System.out.println("pas matché");
                 }
             }
-
+*/
 request.setAttribute("actions", actions);
             request.setAttribute("navType", "index");
 
