@@ -68,29 +68,6 @@ public class HomeServlet extends javax.servlet.http.HttpServlet {
             String today = shortDateFormat.format(aujourdhui);
             request.setAttribute("today", today);
 
-            //Actions
-
-            // Modifier
-
-//                for (Event ee : listeEvent) {
-//                    List<String> actions = new ArrayList<>();
-//                    Participant userLoop = (Participant) request.getSession().getAttribute("user");
-//                    System.out.println(ee.getState().getLabel());
-//                    if (ee.getState().getLabel().equals("Créée")
-//                            && userLoop.getIdParticipant().equals(ee.getOrganizer().getIdParticipant())
-//                    ) {
-//                        actions.add( "<a href='${pageContext.request.contextPath}/EditEventServlet'>Modifier</a>");
-//                        System.out.println(actions );
-//                        request.setAttribute("actions", actions);
-//                    } else {                     actions.add(i, "pas matché");
-//                       System.out.println("pas matché");
-//                   }
-//                }
-
-
-
-
-
             request.setAttribute("navType", "index");
 
             request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);

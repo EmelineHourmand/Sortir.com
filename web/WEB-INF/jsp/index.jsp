@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    <form method="post" action="${pageContext.request.contextPath}/SearchServlet">
+    <form method="post" action="${pageContext.request.contextPath}/search">
         Filtrer les sorties <br>
         <div class="row">
 
@@ -63,8 +63,8 @@
                 <br>
 
 
-                Entre le<input type="date" class="form-control">
-                et le<input type="date" class="form-control">
+                Entre le<input type="date" class="form-control" name="beginning">
+                et le<input type="date" class="form-control" name="end" value="${endValue}">
 
             </div>
 
@@ -124,12 +124,7 @@
         </thead>
         <tbody>
 
-        <%--        <c:forEach var="Site" items="${listeSite}">--%>
-        <%--            <option class="dropdown-item" value="${Site.getName()}"--%>
-        <%--                    name="site">${Site.getName()}</option>--%>
-        <%--        </c:forEach>--%>
         <c:forEach var="event" items="${listeEvent}">
-
             <tr>
                 <th scope="row">${event.getName()}</th>
                 <td>${event.getEventBeginning().getDayOfMonth()}/${event.getEventBeginning().getMonth()}/${event.getEventBeginning().getYear()}</td>
@@ -139,26 +134,27 @@
                 <td>?</td>
                 <td><a href="mailto:${event.getOrganizer().getMail()}">${event.getOrganizer().getUsername()}</a></td>
                 <td>
-                //Actions
+                        <%--                Actions--%>
 
-                    // Modifier
+                        <%--                    Modifier--%>
                     <c:if test="${((event.state.label == 'Créée') && (sessionScope.user.idParticipant == (event.organizer.idParticipant)))}">
-                        <a href="${pageContext.request.contextPath}/event?id=${event.idEvent}">Modifier</a>
-                        <a href="${pageContext.request.contextPath}/event?id=${event.idEvent}">Publier</a>
+                        <a href="${pageContext.request.contextPath}/editEvent?id=${event.idEvent}">Modifier</a>
+                        <a href="${pageContext.request.contextPath}/editEvent?id=${event.idEvent}">Publier</a>
                     </c:if>
 
-                    // Annuler
+                        <%--                    // Annuler--%>
                     <c:if test="${((event.state.label == 'Ouverte') && (sessionScope.user.idParticipant == (event.organizer.idParticipant)))}">
-                        <a href="${pageContext.request.contextPath}/event?id=${event.idEvent}">Annuler</a>
+                        <a href="${pageContext.request.contextPath}/editEvent?id=${event.idEvent}">Annuler</a>
                     </c:if>
-<%--                    @TODO--%>
-<%--                    Se désister--%>
-<%--                    <c:if test="${((event.state.label == 'Ouverte') && (sessionScope.user.idParticipant != (event.organizer.idParticipant)))}">--%>
-<%--                        <a href="${pageContext.request.contextPath}/event?id=${event.idEvent}">Publier</a>--%>
-<%--                    </c:if>--%>
-
-
-
+                        <%--                    // Afficher--%>
+                    <c:if test="${(event.state.label == 'Activité en cours') || (event.state.label == 'Clôturée')}">
+                        <a href="${pageContext.request.contextPath}/showEvent?id=${event.idEvent}">Afficher</a>
+                    </c:if>
+                        <%--                    @TODO--%>
+                        <%--                    Se désister--%>
+                        <%--                    <c:if test="${((event.state.label == 'Ouverte') && (sessionScope.user.idParticipant != (event.organizer.idParticipant)))}">--%>
+                        <%--                        <a href="${pageContext.request.contextPath}/event?id=${event.idEvent}">Publier</a>--%>
+                        <%--                    </c:if>--%>
                 </td>
             </tr>
 
