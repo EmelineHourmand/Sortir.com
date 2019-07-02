@@ -17,7 +17,7 @@ public class Participant implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_participant")
-    private long idParticipant;
+    private Long idParticipant;
 
     @Column(name = "username", length = 50, nullable = false)
     private String username;

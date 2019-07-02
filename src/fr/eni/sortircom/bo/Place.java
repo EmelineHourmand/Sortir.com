@@ -19,7 +19,7 @@ public class Place implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_place")
-    private long idPlace;
+    private Long idPlace;
 
     @Column(name = "name", length = 50, nullable = false)
     private String name;
@@ -51,7 +51,6 @@ public class Place implements Serializable {
      * @param longitude
      */
     public Place(String name, String street, float latitude, float longitude, City city) {
-        this.idPlace = idPlace;
         this.name = name;
         this.street = street;
         this.latitude = latitude;

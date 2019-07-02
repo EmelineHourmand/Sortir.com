@@ -17,7 +17,7 @@ public class Registration implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_registration")
-    private long idRegistration;
+    private Long idRegistration;
 
     @Column(name = "date_registration", nullable = false)
     private LocalDateTime dateRegistration;

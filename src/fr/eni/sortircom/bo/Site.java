@@ -16,7 +16,7 @@ public class Site implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_site")
-    private long idSite;
+    private Long idSite;
 
     @Column(name = "name", length = 50, nullable = false)
     private String name;
