@@ -11,14 +11,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
+import java.time.Duration;
+import java.time.Period;
 
 
 /**
  * Servlet for Create new Event and modify an Event
  */
 @WebServlet(name = "EditEventServlet",
-        urlPatterns = {"/event"})
+        urlPatterns = {"/editEvent"})
 public class EditEventServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -34,6 +35,9 @@ public class EditEventServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        /*   /event         -> créer un nouvel event
+         *   /event?id=x    -> modifier l'event x
+         */
 
         if (request.getSession().getAttribute("user") != null) {
 //            --- Connecté ---
@@ -47,6 +51,10 @@ public class EditEventServlet extends HttpServlet {
                     EventManager em = new EventManager();
                     Event event = em.selectEvent(idEvent);
                     request.setAttribute("event", event);
+
+                    Duration duration = Duration.between(event.getEventBeginning(),event.getEventEnd());
+                    long durationMinute = duration.toMinutes();
+                    request.setAttribute("durationMinute", durationMinute);
 
                     request.getRequestDispatcher("/WEB-INF/jsp/EditEvent.jsp").forward(request, response);
                 }catch(NumberFormatException | BLLException e){
