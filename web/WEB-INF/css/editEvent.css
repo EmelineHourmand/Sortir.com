@@ -1,0 +1,17 @@
+btn-fill-width{
+    width:80%;
+    height: 60px;
+}
+.btn-min{
+    height: 60px;
+    min-width:100px;
+    max-width:200px;
+}
+.titre{
+    margin:auto;
+    text-align: center;
+}
+.center{
+    margin:auto;
+    text-align: center;
+}
