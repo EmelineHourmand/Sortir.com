@@ -37,6 +37,7 @@
 </header>
 <body>
 
+
 <c:if test="${!empty errEvent || !empty param.errEvent}">
     <div class="alert alert-danger text-center" role="alert">
         Echec dans l'édition de la sortie.
@@ -262,7 +263,8 @@
                             </div>
                             <c:if test="${!empty event}">
                             <div class="col-xs-6 center">
-                                <button type="submit" name="delete" class="btn btn-secondary">Supprimer</button>
+<%--                                <button type="submit" name="delete" class="btn btn-secondary">Supprimer</button>--%>
+                                    <input type="button" value="delete" class="btn btn-secondary" onclick="javascript:location.href='${pageContext.request.contextPath}/cancelEventServlet${(empty event)? '': "?id=".concat(event.idEvent) }'"/>
                             </div>
                             <div class="col-sm-auto d-none d-sm-block">
                                 <!-- Spacer pour le responsive -->
