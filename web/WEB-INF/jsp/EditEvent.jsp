@@ -37,6 +37,12 @@
 </header>
 <body>
 
+<c:if test="${!empty errEvent || !empty param.errEvent}">
+    <div class="alert alert-danger text-center" role="alert">
+        Echec dans l'édition de la sortie.
+    </div>
+</c:if>
+
 
 <c:set var="eventName" 	    value="${event.name}" scope="page" />
 <c:set var="dateTimeEvent"  value="${event.eventBeginning}" scope="page" />
@@ -46,9 +52,10 @@
 <c:set var="nbParticipant"  value="${event.maxRegistration}" scope="page" />
 <%--<c:set var="durationMinute" value="${event.eventEnd - event.eventBeginning}" scope="page" />--%>
 <c:set var="description" 	value="${event.description}" scope="page" />
-<c:set var="site" 		    value="${event.site.name}" scope="page" />
+<%--<c:set var="site" 		    value="${event.site.name}" scope="page" />--%>
 <c:set var="placeName" 		value="${event.place.name}" scope="page" />
 <c:set var="street" 		value="${event.place.street}" scope="page" />
+<c:set var="cityName" 		value="${event.place.city.name}" scope="page" />
 <c:set var="postalCode" 	value="${event.place.city.postalCode}" scope="page" />
 <c:set var="latitude" 		value="${event.place.latitude}" scope="page" />
 <c:set var="longitude" 		value="${event.place.longitude}" scope="page" />
@@ -90,9 +97,18 @@
                     <!-- Ville organisatrice --> <!-- TODO A revoir pour liste déroulante -->
                     <div class="col-md-6 form-group row col-lg-5 mr-auto ml-auto">
                         <label for="site" class="col-sm-5 col-form-label">Ville organisatrice : </label>
+
                         <div class="col-sm-7">
-                            <input type="text" name="site" class="form-control" id="site" value="${site}" required>
+                            <select class="custom-select" name="site" id="site">
+                                <c:forEach var="site" items="${sites}">
+                                    <option value="${site.idSite}"
+                                            name="site">${site.name}</option>
+                                </c:forEach>
+                            </select>
+
+<%--                            <input type="text" name="site" class="form-control" id="site" value="${site}" required>--%>
                         </div>
+
                     </div>
 
 
@@ -127,11 +143,11 @@
                     <div class="col-lg-auto d-none d-lg-block">
                         <!-- Spacer pour le responsive -->
                     </div>
-                    <!-- Rue --> <!-- TODO A revoir passer en texte fixe et affichage selon Liste déroulante Lieu -->
+                    <!-- Ville --> <!-- TODO A revoir passer en texte fixe et affichage selon Liste déroulante Lieu -->
                     <div class="col-md-6 form-group row col-lg-5 mr-auto ml-auto">
-                        <label for="street" class="col-sm-5  col-form-label">Rue : </label>
+                        <label for="cityName" class="col-sm-5  col-form-label">Ville : </label>
                         <div class="col-sm-7">
-                            <input type="text" name="street" class="form-control" id="street" placeholder="rue" value="${street}" required>
+                            <input type="text" name="cityName" class="form-control" id="cityName" placeholder="Nom de la ville" value="${cityName}" required>
                         </div>
                     </div>
 
@@ -147,11 +163,11 @@
                     <div class="col-lg-auto d-none d-lg-block">
                         <!-- Spacer pour le responsive -->
                     </div>
-                    <!-- Code postal --> <!-- TODO A revoir passer en texte fixe et affichage selon Liste déroulante Lieu -->
+                    <!-- Rue --> <!-- TODO A revoir passer en texte fixe et affichage selon Liste déroulante Lieu -->
                     <div class="col-md-6 form-group row col-lg-5 mr-auto ml-auto">
-                        <label for="postalCode" class="col-sm-5  col-form-label">Code postal : </label>
+                        <label for="street" class="col-sm-5  col-form-label">Rue : </label>
                         <div class="col-sm-7">
-                            <input type="text" name="postalCode" class="form-control" id="postalCode" placeholder="code postal" value="${postalCode}" required>
+                            <input type="text" name="street" class="form-control" id="street" placeholder="rue" value="${street}" required>
                         </div>
                     </div>
 
@@ -167,11 +183,11 @@
                     <div class="col-lg-auto d-none d-lg-block">
                         <!-- Spacer pour le responsive -->
                     </div>
-                    <!-- Latitude --> <!-- TODO A revoir passer en texte fixe et affichage selon Liste déroulante Lieu -->
+                    <!-- Code postal --> <!-- TODO A revoir passer en texte fixe et affichage selon Liste déroulante Lieu -->
                     <div class="col-md-6 form-group row col-lg-5 mr-auto ml-auto">
-                        <label for="latitude" class="col-sm-5  col-form-label">Latitude : </label>
+                        <label for="postalCode" class="col-sm-5  col-form-label">Code postal : </label>
                         <div class="col-sm-7">
-                            <input type="text" name="latitude" class="form-control" id="latitude" placeholder="xx.xxx" value="${latitude}" required>
+                            <input type="text" name="postalCode" class="form-control" id="postalCode" placeholder="code postal" value="${postalCode}" required>
                         </div>
                     </div>
 
@@ -181,14 +197,20 @@
                     <div class="col-md-6 form-group row col-lg-5 mr-auto ml-auto">
                         <label for="description" class="col-sm-5  col-form-label">Description : </label>
                         <div class="col-sm-7">
-                            <textarea class="autoExpand form-control" id="description" name="description" rows="1" data-min-rows='1' placeholder="Description de la sortie." required>${description}</textarea>
+                            <textarea class="autoExpand form-control" id="description" name="description" rows="3" data-min-rows='3' placeholder="Description de la sortie." required>${description}</textarea>
                         </div>
                     </div>
                     <div class="col-lg-auto d-none d-lg-block">
                         <!-- Spacer pour le responsive -->
                     </div>
-                    <!-- Longitude --> <!-- TODO A revoir passer en texte fixe et affichage selon Liste déroulante Lieu -->
+                    <!-- Latitude --> <!-- TODO A revoir passer en texte fixe et affichage selon Liste déroulante Lieu -->
                     <div class="col-md-6 form-group row col-lg-5 mr-auto ml-auto">
+                        <label for="latitude" class="col-sm-5  col-form-label">Latitude : </label>
+                        <div class="col-sm-7">
+                            <input type="text" name="latitude" class="form-control" id="latitude" placeholder="xx.xxx" value="${latitude}" required>
+                        </div>
+                        <br><br>
+                        <!-- Longitude --> <!-- TODO A revoir passer en texte fixe et affichage selon Liste déroulante Lieu -->
                         <label for="longitude" class="col-sm-5  col-form-label">Longitude : </label>
                         <div class="col-sm-7">
                             <input type="text" name="longitude" class="form-control" id="longitude" placeholder="xx.xxx" value="${longitude}" required>
@@ -234,20 +256,20 @@
                             </div>
                             &nbsp;
                             <div class="col-xs-6 center">
-                                <button type="submit" name="create" class="btn btn-secondary">Publier</button>
+                                <button type="submit" name="publish" class="btn btn-secondary">Publier</button>
                             </div>
                             <div class="col-sm-auto d-none d-sm-block">
                                 <!-- Spacer pour le responsive -->
                             </div>
                             <div class="col-xs-6 center">
-                                <button type="submit" name="create" class="btn btn-secondary">Supprimer</button>
+                                <button type="submit" name="delete" class="btn btn-secondary">Supprimer</button>
                             </div>
                             <div class="col-sm-auto d-none d-sm-block">
                                 <!-- Spacer pour le responsive -->
                             </div>
 
                             <div class="col-xs-6 center">
-                                <input type="button" value="Annuler" class="btn btn-secondary" onclick="javascript:location.href='${pageContext.request.contextPath}/index'"/>
+                                <input type="button" value="cancel" class="btn btn-secondary" onclick="javascript:location.href='${pageContext.request.contextPath}/index'"/>
                             </div>
                         </div>
                     </div>
