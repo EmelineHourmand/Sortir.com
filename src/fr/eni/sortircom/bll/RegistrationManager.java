@@ -42,4 +42,8 @@ public class RegistrationManager {
             throw bllException;
         }
     }
+
+    public void deleteRegistration(Long id) {
+            registrationDAO.delete(id);
+    }
 }

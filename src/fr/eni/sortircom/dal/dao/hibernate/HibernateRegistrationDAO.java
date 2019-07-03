@@ -28,4 +28,12 @@ public class HibernateRegistrationDAO implements RegistrationDAO {
         return q.getResultList();
     }
 
+    @Override
+    public void delete(Long id) {
+        Session session = ConnectionProvider.getConnection();
+        Registration registration = (Registration) session.get(Registration.class, id);
+        session.beginTransaction();
+        session.delete(registration);
+        session.getTransaction().commit();
+    }
 }

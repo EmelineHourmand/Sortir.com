@@ -10,5 +10,6 @@ public interface RegistrationDAO {
     List<Registration> selectById(Long id) throws DALException;
 
     void insert(Registration registration) throws DALException;
+    void delete(Long id);
 
 }

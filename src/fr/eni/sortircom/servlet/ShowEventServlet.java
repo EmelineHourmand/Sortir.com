@@ -36,12 +36,14 @@ public class ShowEventServlet extends HttpServlet {
             for (Registration registration : registrations) {
                 if (registration.getParticipant().getIdParticipant() == userLog.getIdParticipant()) {
                     userIsRegister = true;
+                    request.setAttribute("nbRegister", registration.getIdRegistration() );
                 }
             }
             request.setAttribute("event", event);
             request.setAttribute("userLog", userLog);
             request.setAttribute("nbRegister", nbRegister);
             request.setAttribute("userIsRegister", userIsRegister );
+            request.setAttribute("registrations", registrations);
             RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/showEvent.jsp");
             rd.forward(request, response);
         } catch (BLLException e) {
