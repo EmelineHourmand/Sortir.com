@@ -9,7 +9,7 @@ import java.io.IOException;
 
 
 @WebServlet(name = "CancelEventServlet",
-        urlPatterns = {"/cancelEventServlet"})
+        urlPatterns = {"/cancelEvent"})
 public class CancelEventServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

@@ -264,7 +264,7 @@
                             <c:if test="${!empty event}">
                             <div class="col-xs-6 center">
 <%--                                <button type="submit" name="delete" class="btn btn-secondary">Supprimer</button>--%>
-                                    <input type="button" value="delete" class="btn btn-secondary" onclick="javascript:location.href='${pageContext.request.contextPath}/cancelEventServlet${(empty event)? '': "?id=".concat(event.idEvent) }'"/>
+                                    <input type="button" value="delete" class="btn btn-secondary" onclick="javascript:location.href='${pageContext.request.contextPath}/cancelEvent${(empty event)? '': "?id=".concat(event.idEvent) }'"/>
                             </div>
                             <div class="col-sm-auto d-none d-sm-block">
                                 <!-- Spacer pour le responsive -->

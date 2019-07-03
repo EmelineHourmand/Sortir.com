@@ -138,6 +138,7 @@ public class EditEventServlet extends HttpServlet {
                     EventManager em = new EventManager();
                     Event ev = em.selectEvent(Long.parseLong(request.getParameter("idEvent")));
                     // TODO suppression sortie
+                    // En faite non ne passera jamais là car lien vers page cancelEvent
 
                 } catch (NumberFormatException | BLLException e) {
                     e.printStackTrace();
