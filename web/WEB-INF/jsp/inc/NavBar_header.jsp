@@ -60,7 +60,7 @@
             <c:if test="${empty navType || navType == 'index'}">
             <%--Mon Profil--%>
             <li class="nav-item h5">
-                <a class="nav-link" href="${pageContext.request.contextPath}/profile">Mon Profil</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/myProfile">Mon Profil</a>
             </li>
             </c:if>
             <c:if test="${empty navType || navType == 'index'}">

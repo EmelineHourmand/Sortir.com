@@ -132,11 +132,10 @@
                 <td>?/?</td>
                 <td>${event.getState().getLabel()}</td>
                 <td>?</td>
-                <td><a href="mailto:${event.getOrganizer().getMail()}">${event.getOrganizer().getUsername()}</a></td>
+                <td><a href="${pageContext.request.contextPath}/profile?id=${event.getOrganizer().getIdParticipant()}">${event.getOrganizer().getUsername()}</a></td>
                 <td>
-                        <%--                Actions--%>
-
-                        <%--                    Modifier--%>
+                    <%-- Actions--%>
+                        <%-- Modifier--%>
                     <c:if test="${((event.state.label == 'Créée') && (sessionScope.user.idParticipant == (event.organizer.idParticipant)))}">
                         <a href="${pageContext.request.contextPath}/editEvent?id=${event.idEvent}">Modifier</a>
                         <a href="${pageContext.request.contextPath}/editEvent?id=${event.idEvent}">Publier</a>
@@ -147,7 +146,7 @@
                         <a href="${pageContext.request.contextPath}/editEvent?id=${event.idEvent}">Annuler</a>
                     </c:if>
                         <%--                    // Afficher--%>
-                    <c:if test="${(event.state.label == 'Activité en cours') || (event.state.label == 'Clôturée')}">
+                    <c:if test="${event.state.label == 'Activité en cours' || event.state.label == 'Clôturée' || event.state.label == 'Ouverte'}">
                         <a href="${pageContext.request.contextPath}/showEvent?id=${event.idEvent}">Afficher</a>
                     </c:if>
                         <%--                    @TODO--%>

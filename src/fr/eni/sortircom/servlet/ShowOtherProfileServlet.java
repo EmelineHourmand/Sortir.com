@@ -13,36 +13,29 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-/**
- * @author Emeline Hourmand
- */
-@WebServlet("/myProfile")
-public class ProfileServlet extends HttpServlet {
-
-    private Participant participant;
-
+@WebServlet("/profile")
+public class ShowOtherProfileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request,response);
     }
 
-    /**
-     * Récupère les informations de l'utilisateur connecter
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
-     */
-   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ParticipantManager pm = new ParticipantManager();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         if (session.getAttribute("user") == null) {
-            session.setAttribute("lastUrl", "/myProfile");
+            session.setAttribute("lastUrl", "/profile");
             RequestDispatcher rd = request.getRequestDispatcher("/login");
             rd.forward(request, response);
         } else {
-            participant = (Participant) session.getAttribute("user");
-            request.setAttribute("participant", this.participant);
-            request.getRequestDispatcher("/WEB-INF/jsp/showProfile.jsp").forward(request, response);
+            try {
+                ParticipantManager pm = new ParticipantManager();
+                Participant participant = pm.selectParticipant(Long.parseLong(request.getParameter("id")));
+                request.setAttribute("userLog", session.getAttribute("user"));
+                request.setAttribute("participant", participant);
+                request.getRequestDispatcher("/WEB-INF/jsp/showOtherProfile.jsp").forward(request, response);
+            } catch (BLLException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 }
