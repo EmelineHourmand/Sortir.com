@@ -11,11 +11,10 @@ import java.util.List;
 public class HibernateRegistrationDAO implements RegistrationDAO {
 
     @Override
-    public int selectById(Long id) {
+    public List<Registration> selectById(Long id) {
         Session session = ConnectionProvider.getConnection();
         Query q = session.createQuery("FROM Registration WHERE event.idEvent=:idEvent");
         q.setParameter("idEvent", id);
-        List<Registration> registrations = q.getResultList();
-        return registrations.size();
+        return q.getResultList();
     }
 }
