@@ -19,6 +19,14 @@ public class RegistrationManager {
         registrationDAO = DAOFactory.getRegistationDAO();
     }
 
+    public void insertRegistration(Registration registration) {
+        try {
+            registrationDAO.insert(registration);
+        } catch (DALException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Selection des Participants inscrit a l'évent
      * @param id

@@ -35,4 +35,10 @@ public class Registration implements Serializable {
     }
 
     public Registration() {}
+
+    public Registration(LocalDateTime dateRegistration, Participant participant, Event event) {
+        this.dateRegistration = dateRegistration;
+        this.participant = participant;
+        this.event = event;
+    }
 }
