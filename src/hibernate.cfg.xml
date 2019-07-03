@@ -6,11 +6,9 @@
 	<session-factory>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
 		<property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-<!--		<property name="hibernate.connection.url">jdbc:mysql://loclahost:3306/sortir?useSSL=false&amp;serverTimezone=UTC</property>-->
-
-		<property name="hibernate.connection.url">jdbc:mysql://10.44.101.39:3306/sortir?useSSL=false&amp;serverTimezone=UTC</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sortir?useSSL=false&amp;serverTimezone=UTC</property>
 		<property name="hibernate.connection.username">root</property>
-		<property name="hibernate.connection.password">pass</property>
+		<property name="hibernate.connection.password"></property>
 		<property name="hibernate.show_sql">true</property>
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<property name="hibernate.connection.pool_size">10</property>
@@ -22,5 +20,6 @@
 		<mapping class="fr.eni.sortircom.bo.Place"/>
 		<mapping class="fr.eni.sortircom.bo.State"/>
 		<mapping class="fr.eni.sortircom.bo.City"/>
+		<mapping class="fr.eni.sortircom.bo.Registration"/>
 	</session-factory>
 </hibernate-configuration>

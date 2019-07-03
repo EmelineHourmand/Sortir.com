@@ -27,7 +27,7 @@
             <p><b>Téléphone:</b> ${participant.phone}</p>
         </c:if>
         <div class="btn-profile">
-            <a class="btn btn-outline-info"
+            <a class="btn btn-outline-secondary"
                href="${pageContext.request.contextPath}/index" role="button">
                 <i class="fas fa-arrow-left"></i> Retour</a>
             <a class="btn btn-outline-info"

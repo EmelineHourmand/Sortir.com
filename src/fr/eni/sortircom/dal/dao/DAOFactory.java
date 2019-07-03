@@ -21,4 +21,6 @@ public class DAOFactory {
 
     public static StateDAO getStateDAO() { return new HibernateStateDAO(); }
 
+    public static RegistrationDAO getRegistationDAO() { return new HibernateRegistrationDAO(); }
+
 }
