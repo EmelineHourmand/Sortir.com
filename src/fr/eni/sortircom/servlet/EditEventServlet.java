@@ -1,7 +1,7 @@
 package fr.eni.sortircom.servlet;
 
+
 import fr.eni.sortircom.bll.EventManager;
-import fr.eni.sortircom.bll.ParticipantManager;
 import fr.eni.sortircom.bll.SiteManager;
 import fr.eni.sortircom.bll.StateManager;
 import fr.eni.sortircom.bll.exception.BLLException;
@@ -30,74 +30,80 @@ public class EditEventServlet extends HttpServlet {
             // ----- Connecté -----
             if(request.getParameter("idEvent") != null){
                 // ----- id event OK -----
-                EventManager em = new EventManager();
-                StateManager stm = new StateManager();
-                SiteManager sm = new SiteManager();
+                if( request.getParameter("save")!= null ||
+                    request.getParameter("publish")!= null ||
+                    request.getParameter("delete")!= null){
+                    // ----- click sur un bouton OK -----
 
-                try {
-                    List<State> states = stm.selectAllState();
-                    List<Site> sites = sm.selectAllSite();
-                    Event ev = em.selectEvent(Long.parseLong(request.getParameter("idEvent")));
+                    EventManager em = new EventManager();
+                    StateManager stm = new StateManager();
+                    SiteManager sm = new SiteManager();
 
-
-                    // Pour la place C'est pas top, devrait créer des nouvelle place pour les garders en mémoire (lien oneToMany)
-                    Place place = ev.getPlace();
-                    City city = place.getCity();
-                    State state = ev.getState();
-                    Site site = ev.getSite();
-/*
-                    city.setName();
-                    city.setPostalCode();
-
-                    place.setCity(city);
-                    place.setName();
-                    place.setStreet();
-                    place.setLatitude();
-                    place.setLongitude();
+                    try {
+                        List<State> states = stm.selectAllState();
+                        List<Site> sites = sm.selectAllSite();
+                        Event ev = em.selectEvent(Long.parseLong(request.getParameter("idEvent")));
 
 
-
-                    ev.setName();
-                    ev.setEventBeginning();
-                    ev.setEventEnd();
-                    ev.setRegistrationLimit();
-                    ev.setMaxRegistration();
-                    ev.setDescription();
+                        // Pour la place C'est pas top, devrait créer des nouvelle place pour les garders en mémoire (lien oneToMany)
+                        Place place = ev.getPlace();
+                        City city = place.getCity();
 
 
-                    ev.setPlace();
+//                        ev.setName(request.getParameter("eventName"));
+//                        ev.setEventBeginning(request.getParameter("dateTimeEvent"));
+//                        ev.setEventEnd(request.getParameter("dateLimit"));
+//                        ev.setRegistrationLimit(request.getParameter("durationMinute"));
+//                        ev.setMaxRegistration(request.getParameter("nbParticipant"));
+//                        ev.setDescription(request.getParameter("description"));
+//
+//                        city.setName("");
+//                        city.setPostalCode("postalCode");
+//
+//                        place.setCity(city);
+//                        place.setName("placeName");
+//                        place.setStreet("street");
+//                        place.setLatitude("latitude");
+//                        place.setLongitude("longitude");
 
-*/
+                        ev.setPlace(place);
 
 
-                } catch (NumberFormatException | BLLException e) {
-                    // ----- Event non retrouvé ou mauvais format -----
+
+
+
+
+                        State state = ev.getState();
+                        Site site = ev.getSite();
+
+
+                        request.getParameter("save");
+                        request.getParameter("publish");
+                        request.getParameter("delete");
+
+
+                    } catch (NumberFormatException | BLLException e) {
+                        // ----- Event non retrouvé ou mauvais format -----
 
 //                    e.printStackTrace();
 
 
 
+                    }
+
+
+
+
+                }else{
+                    // ----- click sur un bouton KO -----
+                    response.sendRedirect(request.getContextPath() + "/editEvent?id=" + request.getParameter("idEvent") + "&errEvent=KO");
                 }
-
-
             }else{
                 // ----- id event KO -----
-
+                response.sendRedirect(request.getContextPath() + "/editEvent?errEvent=KO");
             }
+//            "site"
 
-
-//"eventName"
-//"dateTimeEvent"
-//"dateLimit"
-//"nbParticipant"
-//"durationMinute"
-//"description"
-//"site"
-//"placeName"
-//"street"
-//"postalCode"
-//"latitude"
-//"longitude"
 //            dateLimit
 //            2019-07-02
 //            dateTimeEvent
@@ -156,6 +162,11 @@ public class EditEventServlet extends HttpServlet {
                     Duration duration = Duration.between(event.getEventBeginning(),event.getEventEnd());
                     long durationMinute = duration.toMinutes();
                     request.setAttribute("durationMinute", durationMinute);
+
+                    // Récupérer liste des sites
+                    SiteManager sm = new SiteManager();
+                    List<Site> sites =  sm.selectAllSite();
+                    request.setAttribute("sites", sites);
 
                     request.getRequestDispatcher("/WEB-INF/jsp/EditEvent.jsp").forward(request, response);
                 }catch(NumberFormatException | BLLException e){
