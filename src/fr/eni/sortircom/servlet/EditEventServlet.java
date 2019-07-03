@@ -42,13 +42,21 @@ public class EditEventServlet extends HttpServlet {
                     try {
                         List<State> states = stm.selectAllState();
                         List<Site> sites = sm.selectAllSite();
+
+                        // Récupération de l'event origine
                         Event ev = em.selectEvent(Long.parseLong(request.getParameter("idEvent")));
 
-
-                        // Pour la place C'est pas top, devrait créer des nouvelle place pour les garders en mémoire (lien oneToMany)
+                        // Extraction des sous obbjet de l'évent pour modification
                         Place place = ev.getPlace();
                         City city = place.getCity();
+                        State state = ev.getState();
+                        Site site = ev.getSite();
 
+                        // Modification de site
+
+
+
+                        request.getParameter("site");
 
 //                        ev.setName(request.getParameter("eventName"));
 //                        ev.setEventBeginning(request.getParameter("dateTimeEvent"));
@@ -57,14 +65,14 @@ public class EditEventServlet extends HttpServlet {
 //                        ev.setMaxRegistration(request.getParameter("nbParticipant"));
 //                        ev.setDescription(request.getParameter("description"));
 //
-//                        city.setName("");
-//                        city.setPostalCode("postalCode");
+//                        city.setName(request.getParameter("cityName");
+//                        city.setPostalCode(request.getParameter("postalCode"));
 //
 //                        place.setCity(city);
-//                        place.setName("placeName");
-//                        place.setStreet("street");
-//                        place.setLatitude("latitude");
-//                        place.setLongitude("longitude");
+//                        place.setName(request.getParameter("placeName"));
+//                        place.setStreet(request.getParameter("street"));
+//                        place.setLatitude(request.getParameter("latitude"));
+//                        place.setLongitude(request.getParameter("longitude"));
 
                         ev.setPlace(place);
 
@@ -73,10 +81,9 @@ public class EditEventServlet extends HttpServlet {
 
 
 
-                        State state = ev.getState();
-                        Site site = ev.getSite();
 
 
+                        // state selon btn cliqué :
                         request.getParameter("save");
                         request.getParameter("publish");
                         request.getParameter("delete");
@@ -175,6 +182,18 @@ public class EditEventServlet extends HttpServlet {
 
             }else {
                 // --- New Event ----
+                // Récupérer liste des sites
+
+
+                try {
+                    SiteManager sm = new SiteManager();
+                    List<Site> sites = sm.selectAllSite();
+                    request.setAttribute("sites", sites);
+                } catch (BLLException e) {
+                    e.printStackTrace();
+                }
+
+
                 request.getRequestDispatcher("/WEB-INF/jsp/EditEvent.jsp").forward(request, response);
             }
             //this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/EditEvent.jsp")
