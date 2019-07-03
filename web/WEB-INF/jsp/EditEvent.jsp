@@ -43,16 +43,21 @@
     </div>
 </c:if>
 
-
+${event.registrationLimit}.<br>
 <c:set var="eventName" 	    value="${event.name}" scope="page" />
-<c:set var="dateTimeEvent"  value="${event.eventBeginning}" scope="page" />
-<fmt:parseDate value="${event.registrationLimit}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDateTime" type="both" />
-<fmt:formatDate pattern="yyyy-MM-dd" value="${ parsedDateTime }" var="dateLimit" />
+<%--<c:set var="dateTimeEvent"  value="${event.eventBeginning}" scope="page" />--%>
+
+<fmt:parseDate value="${event.eventBeginning}" pattern="yyyy-MM-dd'T'HH:mm" type="both" var="parsedDateTime"  />
+<fmt:formatDate value="${parsedDateTime}" pattern="yyyy-MM-dd'T'HH:mm" var="dateTimeEvent" />
+
+<fmt:parseDate value="${event.registrationLimit}" pattern="yyyy-MM-dd'T'HH:mm" type="both" var="parsedDateTime"  />
+<fmt:formatDate value="${ parsedDateTime }" pattern="yyyy-MM-dd" var="dateLimit"  />
+
 <%--<c:set var="dateLimit" 	    value="${event.registrationLimit}" scope="page" />--%>
 <c:set var="nbParticipant"  value="${event.maxRegistration}" scope="page" />
 <%--<c:set var="durationMinute" value="${event.eventEnd - event.eventBeginning}" scope="page" />--%>
 <c:set var="description" 	value="${event.description}" scope="page" />
-<%--<c:set var="site" 		    value="${event.site.name}" scope="page" />--%>
+<c:set var="siteIdEvent" 	value="${event.site.idSite}" scope="page" /><%--Retourne cette valeur sous site lors du post--%>
 <c:set var="placeName" 		value="${event.place.name}" scope="page" />
 <c:set var="street" 		value="${event.place.street}" scope="page" />
 <c:set var="cityName" 		value="${event.place.city.name}" scope="page" />
@@ -69,7 +74,7 @@
 
 <div class="container-fluid">
     <br><br>
-    <h4 class="text-center">Modifier une sortie</h4>
+    <h4 class="text-center">${(empty event)? 'Créer une sortie': 'Modifier une sortie'}</h4>
     <br>
 <%--        <div class="col-sm-11 col-md-12 col-lg-11 mr-auto ml-auto"><!-- sur 11 col centré -->--%>
             <div class="col-sm-12 col-md-12 col-lg-12 mr-auto ml-auto">
@@ -102,7 +107,8 @@
                             <select class="custom-select" name="site" id="site">
                                 <c:forEach var="site" items="${sites}">
                                     <option value="${site.idSite}"
-                                            name="site">${site.name}</option>
+                                            name="site"
+                                            ${ (siteIdEvent == site.idSite)? 'selected' : '' }>${site.name}</option>
                                 </c:forEach>
                             </select>
 
@@ -127,7 +133,7 @@
                     <div class="col-md-6 form-group row col-lg-5 mr-auto ml-auto">
                         <label for="placeName" class="col-sm-5  col-form-label">Lieu : </label>
                         <div class="col-sm-7">
-                            <input type="text" name="placeName" class="form-control" id="placeName" value="${placeName}" required>
+                            <input type="text" name="placeName" class="form-control" id="placeName" placeholder="Nom du lieu" value="${placeName}" required>
                         </div>
                     </div>
 
@@ -187,7 +193,7 @@
                     <div class="col-md-6 form-group row col-lg-5 mr-auto ml-auto">
                         <label for="postalCode" class="col-sm-5  col-form-label">Code postal : </label>
                         <div class="col-sm-7">
-                            <input type="text" name="postalCode" class="form-control" id="postalCode" placeholder="code postal" value="${postalCode}" required>
+                            <input type="text" name="postalCode" class="form-control" id="postalCode" placeholder="Code postal" value="${postalCode}" required>
                         </div>
                     </div>
 
@@ -261,13 +267,14 @@
                             <div class="col-sm-auto d-none d-sm-block">
                                 <!-- Spacer pour le responsive -->
                             </div>
+                            <c:if test="${!empty event}">
                             <div class="col-xs-6 center">
                                 <button type="submit" name="delete" class="btn btn-secondary">Supprimer</button>
                             </div>
                             <div class="col-sm-auto d-none d-sm-block">
                                 <!-- Spacer pour le responsive -->
                             </div>
-
+                            </c:if>
                             <div class="col-xs-6 center">
                                 <input type="button" value="cancel" class="btn btn-secondary" onclick="javascript:location.href='${pageContext.request.contextPath}/index'"/>
                             </div>
