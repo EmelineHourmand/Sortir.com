@@ -43,11 +43,9 @@
     </div>
 </c:if>
 
-${event.registrationLimit}.<br>
 <c:set var="eventName" 	    value="${event.name}" scope="page" />
-<%--<c:set var="dateTimeEvent"  value="${event.eventBeginning}" scope="page" />--%>
-
-<fmt:parseDate value="${event.eventBeginning}" pattern="yyyy-MM-dd'T'HH:mm" type="both" var="parsedDateTime"  />
+<%--<c:set var="dateTimeEvent"  value="${event.eventBeginning}" scope="page" />--%><%-- En brut LocalDateTime affiche les seconde qui ne sont pas éditable dans l'input type="datetime-local" --%>
+<fmt:parseDate value="${event.eventBeginning}" pattern="yyyy-MM-dd'T'HH:mm" type="both" var="parsedDateTime"  /><%--  yyyy-MM-dd'T'HH:mm:ss ne match pas toujours (si les seconde sont 00 elle ne sont pas présente) --%>
 <fmt:formatDate value="${parsedDateTime}" pattern="yyyy-MM-dd'T'HH:mm" var="dateTimeEvent" />
 
 <fmt:parseDate value="${event.registrationLimit}" pattern="yyyy-MM-dd'T'HH:mm" type="both" var="parsedDateTime"  />
@@ -64,11 +62,6 @@ ${event.registrationLimit}.<br>
 <c:set var="postalCode" 	value="${event.place.city.postalCode}" scope="page" />
 <c:set var="latitude" 		value="${event.place.latitude}" scope="page" />
 <c:set var="longitude" 		value="${event.place.longitude}" scope="page" />
-
-
-<%--<fmt:parseDate value="${ event.eventBeginning }" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDateTime" type="both" />--%>
-<%--<fmt:formatDate pattern="dd.MM.yyyy HH:mm" value="${ parsedDateTime }" />--%>
-<%--<br>--%>
 
 
 

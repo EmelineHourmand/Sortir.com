@@ -40,12 +40,14 @@ public class HibernateEventDAO implements EventDAO {
     }
 
     @Override
-    public Event selectById(Long id) {
+    public Event selectById(Long id) throws DALException {
         Session session = ConnectionProvider.getConnection();
-        Query q = session.createQuery("FROM Event WHERE idEvent=:id");
-        q.setParameter("id", id);
-        List<Event> events = q.getResultList();
-        Event event = events.get(0);
+//        Query q = session.createQuery("FROM Event WHERE idEvent=:id");
+//        q.setParameter("id", id);
+//        List<Event> events = q.getResultList();
+//        Event event = events.get(0);
+        Event event = session.get(Event.class, id);
+        if (event == null){throw new DALException("Couche DAL - Aucun Evenement correspondant.");}
         return event;
     }
 
@@ -53,7 +55,7 @@ public class HibernateEventDAO implements EventDAO {
     public void update(Event event) {
         Session session = ConnectionProvider.getConnection();
         session.beginTransaction();
-        session.saveOrUpdate(event);
+        session.update(event);
         session.getTransaction().commit();
     }
 
@@ -64,6 +66,5 @@ public class HibernateEventDAO implements EventDAO {
         session.beginTransaction();
         session.delete(event);
         session.getTransaction().commit();
-
     }
 }
