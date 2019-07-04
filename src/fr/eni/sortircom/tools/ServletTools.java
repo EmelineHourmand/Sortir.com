@@ -6,6 +6,9 @@ import fr.eni.sortircom.bo.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDateTime;
 
 public abstract class ServletTools {
@@ -33,7 +36,20 @@ public abstract class ServletTools {
         return null;
     }
 
-
+    /**
+     * Fonction à appeler dans une sevlet doGet pas encore implémenté.
+     * @param request
+     * @param response
+     * @param link
+     * @throws IOException
+     */
+    public static void notYetImplemented(HttpServletRequest request, HttpServletResponse response, String link) throws IOException {
+        PrintWriter out = response.getWriter();
+        out.println("<br>");
+        out.println("Pas encore implémenté !<br>");
+        out.println("<a href=" + request.getContextPath() +"/"+link + ">" +"Retour sur la page /" + link + "</a>");
+        out.flush();
+    }
 
 
 
