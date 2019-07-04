@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: hwasier2019
@@ -19,6 +20,14 @@
 <header>
     <jsp:include page="inc/NavBar_header.jsp"></jsp:include>
 </header>
+
+
+<fmt:parseDate value="${beginning}" pattern="yyyy-MM-dd'T'HH:mm" type="both" var="parsedDateTime"  />
+<fmt:formatDate value="${ parsedDateTime }" pattern="yyyy-MM-dd" var="beginningDate"  />
+
+<fmt:parseDate value="${end}" pattern="yyyy-MM-dd'T'HH:mm" type="both" var="parsedDateTime"  />
+<fmt:formatDate value="${ parsedDateTime }" pattern="yyyy-MM-dd" var="endDate"  />
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3">
@@ -52,19 +61,16 @@
                     </select>
                 </div>
                 <br>
-
                 <%--formulaire de recherche--%>
-                <%--                <label for="site"> Le nom de la sortie contient:</label>--%>
-
                 <div class="input-group mb-3">
                     <input class="form-control" type="search" id="site-search" name="q"
-                           placeholder="Le nom de la sortie contient:" aria-label="Search">
+                           placeholder="Le nom de la sortie contient:" aria-label="Search" value="${recherche}">
                 </div>
                 <br>
 
 
-                Entre le<input type="date" class="form-control" name="beginning" value="${beginning}">
-                et le<input type="date" class="form-control" name="end" value="${endValue}">
+                Entre le<input type="date" class="form-control" name="beginning" value="${beginningDate}">
+                et le<input type="date" class="form-control" name="end" value="${endDate}">
 
             </div>
 
@@ -72,28 +78,28 @@
 
                 <%--check-box Organisateur?--%>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="organistor">
+                    <input class="form-check-input" type="checkbox" value="" id="organistor" name="isOrganisator">
                     <label class="form-check-label" for="defaultCheck1">
                         Sorties dont je suis l'organisateur/trice
                     </label>
                 </div>
                 <%--check-box inscrit?--%>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="singnedUp">
+                    <input class="form-check-input" type="checkbox" value="" id="singnedUp" name="isInscrit">
                     <label class="form-check-label" for="defaultCheck1">
                         Sorties auxquelles je suis inscrit/e
                     </label>
                 </div>
                 <%--check-box pas inscrit?--%>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="notSignedUp">
+                    <input class="form-check-input" type="checkbox" value="" id="notSignedUp" name="isNotInscrit">
                     <label class="form-check-label" for="defaultCheck1">
                         Sorties auxquelles je ne suis pas inscrit/e
                     </label>
                 </div>
                 <%--check-box Sortie passée?--%>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="passedEvent">
+                    <input class="form-check-input" type="checkbox" value="" id="passedEvent" name="isSortiePassee">
                     <label class="form-check-label" for="defaultCheck1">
                         Sorties passées
                     </label>
@@ -103,7 +109,8 @@
             </div>
             <div class="col-sm-2">
                 <!--Bouton rechercher-->
-                <input type="submit" value="Rechercher"/>
+                <input class="btn btn-secondary" type="submit" value="Rechercher"/> <br> <br>
+                <a class="btn btn-secondary" href="${pageContext.request.contextPath}/editEvent">Créer une sortie</a>
             </div>
         </div>
     </form>

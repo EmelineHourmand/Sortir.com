@@ -39,6 +39,7 @@ public class HomeServlet extends javax.servlet.http.HttpServlet {
         if (request.getSession().getAttribute("user") != null) {
 
 
+
             //Création liste Sites
             SiteManager s = new SiteManager();
             List<Site> listeSite = null;
@@ -47,7 +48,11 @@ public class HomeServlet extends javax.servlet.http.HttpServlet {
             } catch (BLLException e) {
                 e.printStackTrace();
             }
-            System.out.println(listeSite);
+            //System.out.println(listeSite);
+            for (Site site : listeSite){
+                System.out.println(site.getName());
+            }
+
             request.setAttribute("listeSite", listeSite);
 
 
