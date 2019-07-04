@@ -14,12 +14,11 @@
     <script>
         function forgottenPass(){
             var emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-            var emailInput = document.forms["loginForm"]["email"];
-
-            if(!emailInput.value.match(emailPattern)){
+            var loginInput = document.forms["loginForm"]["login"];
+            if(!loginInput.value.match(emailPattern)){
                 //console.log("mail pas ok");
-                alert("Veuillez entrer votre email.");
-                emailInput.focus()
+                alert("Veuillez entrer votre email dans le champ login.");
+                loginInput.focus()
             }else{
                 //console.log("mail ok");
                 alert("Un message a bien été envoyé, vous recevrez une réponse par email.");
@@ -66,7 +65,7 @@
                             <button class="btn btn-lg btn-secondary btn-block" type="submit">Se connecter</button>
 
                             <hr class="my-4">
-                            <div class="text-center"><a href="#" onclick="return forgottenPass();">Mot de passe oublié</a></div>
+                            <div class="text-center"><a href="" onclick="return forgottenPass();">Mot de passe oublié</a></div>
 
                         </form>
                     </div>
@@ -75,7 +74,6 @@
         </div>
 
     </div>
-
 
 </body>
 </html>

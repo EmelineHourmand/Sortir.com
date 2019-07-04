@@ -7,4 +7,4 @@
     <script	src="${pageContext.request.contextPath}/vendor/popper/popper.min.js"></script>
     <script	src="${pageContext.request.contextPath}/vendor/bootstrap4/bootstrap.min.js"></script>
     <script	src="${pageContext.request.contextPath}/js/main.js"></script>
-    <script src="https://use.fontawesome.com/releases/v5.6.3/css/all.css"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
