@@ -24,30 +24,36 @@ public class ShowEventServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            EventManager em = new EventManager();
-            RegistrationManager rm = new RegistrationManager();
-            Event event = em.selectEvent(Long.parseLong(request.getParameter("id")));
-            List<Registration> registrations = rm.selectParticipantEvent(Long.parseLong(request.getParameter("id")));
-            int nbRegister = registrations.size();
-            HttpSession session = request.getSession();
-            Participant userLog = (Participant) session.getAttribute("user");
-            boolean userIsRegister = false;
-            for (Registration registration : registrations) {
-                if (registration.getParticipant().getIdParticipant() == userLog.getIdParticipant()) {
-                    userIsRegister = true;
-                    request.setAttribute("nbRegister", registration.getIdRegistration() );
+        if (request.getSession().getAttribute("user") != null) {
+//            --- Connecté ---
+            try {
+                EventManager em = new EventManager();
+                RegistrationManager rm = new RegistrationManager();
+                Event event = em.selectEvent(Long.parseLong(request.getParameter("id")));
+                List<Registration> registrations = rm.selectParticipantEvent(Long.parseLong(request.getParameter("id")));
+                int nbRegister = registrations.size();
+                HttpSession session = request.getSession();
+                Participant userLog = (Participant) session.getAttribute("user");
+                boolean userIsRegister = false;
+                for (Registration registration : registrations) {
+                    if (registration.getParticipant().getIdParticipant() == userLog.getIdParticipant()) {
+                        userIsRegister = true;
+                        request.setAttribute("nbRegister", registration.getIdRegistration() );
+                    }
                 }
+                request.setAttribute("event", event);
+                request.setAttribute("userLog", userLog);
+                request.setAttribute("nbRegister", nbRegister);
+                request.setAttribute("userIsRegister", userIsRegister );
+                request.setAttribute("registrations", registrations);
+                RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/showEvent.jsp");
+                rd.forward(request, response);
+            } catch (BLLException e) {
+                e.printStackTrace();
             }
-            request.setAttribute("event", event);
-            request.setAttribute("userLog", userLog);
-            request.setAttribute("nbRegister", nbRegister);
-            request.setAttribute("userIsRegister", userIsRegister );
-            request.setAttribute("registrations", registrations);
-            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/showEvent.jsp");
-            rd.forward(request, response);
-        } catch (BLLException e) {
-            e.printStackTrace();
+        } else {
+//            --- Non Connecté ---
+            response.sendRedirect(request.getContextPath() + "/login");
         }
     }
 }

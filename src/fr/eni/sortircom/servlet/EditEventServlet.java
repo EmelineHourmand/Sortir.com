@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -149,7 +150,6 @@ public class EditEventServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/editEvent?id=" + request.getParameter("idEvent") + "&errEvent=KO");
 
             }
-
 
         } else {
             // ----- Non connecté -----
