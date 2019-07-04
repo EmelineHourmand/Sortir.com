@@ -38,8 +38,3 @@ public class HibernateRegistrationDAO implements RegistrationDAO {
     }
 }
 
-//
-//    SELECT e.* FROM sortir.events e
-//        INNER JOIN registrations r ON r.id_event = e.id_event
-//        INNER JOIN participants p ON p.id_participant = r.id_participant
-//        WHERE r.id_participant = 1

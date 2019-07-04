@@ -3,6 +3,7 @@ package fr.eni.sortircom.bll;
 import fr.eni.sortircom.bll.exception.BLLException;
 import fr.eni.sortircom.bll.exception.CodesErreursBLL;
 import fr.eni.sortircom.bo.Event;
+import fr.eni.sortircom.bo.Participant;
 import fr.eni.sortircom.dal.dao.DAOFactory;
 import fr.eni.sortircom.dal.dao.EventDAO;
 import fr.eni.sortircom.dal.exception.DALException;
@@ -52,6 +53,16 @@ public class EventManager {
             throw bllException;
         }
     }
+
+//    public List<Event> selectByRegistredUser(Participant participant, boolean isRegistred) throws BLLException {
+//        try {
+//            return eventDAO.selectByRegistredUser(participant, isRegistred);
+//        } catch (DALException e) {
+//            BLLException bllException = new BLLException();
+//            bllException.addSuppressed(e);
+//            throw bllException;
+//        }
+//    }
 
     public Event selectEvent(Long id) throws BLLException {
         try {

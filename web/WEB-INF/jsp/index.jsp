@@ -56,7 +56,8 @@
                     <select class="custom-select" name="site" id="site">
                         <c:forEach var="Site" items="${listeSite}">
                             <option class="dropdown-item" value="${Site.getName()}"
-                                    name="site">${Site.getName()}</option>
+                                    name="site"
+                                    ${(site == Site.getName()? 'selected' : '')}>${Site.getName()}</option>
                         </c:forEach>
                     </select>
                 </div>

@@ -98,7 +98,7 @@ public class SearchServlet extends HttpServlet {
             // Récupération champ de recherche avec nom de sortie
             String recherche = request.getParameter("q");
             System.out.println("recherche: " + recherche);
-            request.setAttribute("q", recherche);
+            request.setAttribute("recherche", recherche);
 
             // Récupération du site selectionné
             String siteRecherche = request.getParameter("site");
@@ -122,9 +122,9 @@ public class SearchServlet extends HttpServlet {
 
             System.out.println(isOrganisator);
 
-            RegistrationManager rm = new RegistrationManager();
-            List<Registration> registrationList = rm.selectParticipantEvent(user.getIdParticipant());
+
             String isInscrit = request.getParameter("isInscrit");
+
 
             System.out.println(isInscrit);
             String isNotInscrit = request.getParameter("isNotInscrit");

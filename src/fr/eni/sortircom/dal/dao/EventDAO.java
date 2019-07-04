@@ -1,6 +1,7 @@
 package fr.eni.sortircom.dal.dao;
 
 import fr.eni.sortircom.bo.Event;
+import fr.eni.sortircom.bo.Participant;
 import fr.eni.sortircom.dal.exception.DALException;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface EventDAO {
     void update(Event event) throws DALException;
 
     void delete(Long id) throws DALException;
+
+//    List<Event> selectByRegistredUser(Participant participant, boolean isRegistred) throws DALException;
 }
