@@ -42,7 +42,7 @@
             <c:if test="${navType == 'index'}">
             <%--Ville--%>
             <li class="nav-item h5">
-                <a class="nav-link" href="${pageContext.request.contextPath}/ville">Ville</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/cities">Ville</a>
             </li>
             </c:if>
             <c:if test="${navType == 'index'}">
