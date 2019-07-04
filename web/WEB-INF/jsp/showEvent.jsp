@@ -9,14 +9,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Sortie - ${event.name}</title>
+    <title>Sortir.com - ${event.name}</title>
     <jsp:include page="inc/CSS_JS_global.jsp"/>
 </head>
+<body>
 <header>
     <%-- Inclusion de la NavBar --%>
     <jsp:include page="inc/NavBar_header.jsp"/>
 </header>
-<body>
 <div class="container container-padd-top">
     <!-- TITRE DE LA SORTIE -->
     <h3 align="center">${event.name}</h3>

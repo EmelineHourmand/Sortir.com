@@ -121,7 +121,7 @@ public class EditEventServlet extends HttpServlet {
                     // ----- mauvais format input Integer -----
 
                     e.printStackTrace();
-                    if (ev.getIdEvent() != null) {
+                    if (ev != null && ev.getIdEvent() != null) {
                         response.sendRedirect(request.getContextPath() + "/editEvent?id=" + ev.getIdEvent() + "&errEvent=KO");
                     }else{
                         response.sendRedirect(request.getContextPath() + "/editEvent?errEvent=KO");

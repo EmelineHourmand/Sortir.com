@@ -11,14 +11,13 @@
 <head>
     <title>Profil - ${participant.username}</title>
     <jsp:include page="inc/CSS_JS_global.jsp"/>
+    <style><%@include file="/WEB-INF/css/showProfile.css"%></style>
 </head>
+<body>
 <header>
     <%-- Inclusion de la NavBar --%>
     <jsp:include page="inc/NavBar_header.jsp"/>
-
 </header>
-<body>
-<style><%@include file="/WEB-INF/css/showProfile.css"%></style>
 <c:set var="user" value="${userLog}"/>
     <div class="container container-padd-top">
         <div class="form-register rounded">

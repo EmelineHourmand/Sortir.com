@@ -8,14 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Profile</title>
     <jsp:include page="inc/CSS_JS_global.jsp"/>
 </head>
+<body>
 <header>
     <%-- Inclusion de la NavBar --%>
     <jsp:include page="inc/NavBar_header.jsp"/>
 </header>
-<body>
 <div class="container">
     <h1 align="center">Mon profil</h1>
     <form action="${pageContext.request.contextPath}/editProfile" method="POST">

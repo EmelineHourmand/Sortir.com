@@ -11,7 +11,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Sortir.com</title>
     <jsp:include page="inc/CSS_JS_global.jsp"/>
 <%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/editEvent.css">--%>
     <script>
@@ -31,12 +31,12 @@
             });
     </script>
 </head>
+
+<body>
 <header>
     <%-- Inclusion de la NavBar --%>
     <jsp:include page="inc/NavBar_header.jsp"/>
 </header>
-<body>
-
 
 <c:if test="${!empty errEvent || !empty param.errEvent}">
     <div class="alert alert-danger text-center" role="alert">
@@ -244,7 +244,6 @@
 
 
                 <div class="row">
-
                     <div class="col-xs-5 mr-auto ml-auto">
                         <div class="row center">
 
@@ -261,14 +260,16 @@
                             <div class="col-sm-auto d-none d-sm-block">
                                 <!-- Spacer pour le responsive -->
                             </div>
+                            &nbsp;
                             <c:if test="${!empty event}">
                             <div class="col-xs-6 center">
 <%--                                <button type="submit" name="delete" class="btn btn-secondary">Supprimer</button>--%>
-                                    <input type="button" value="delete" class="btn btn-secondary" onclick="javascript:location.href='${pageContext.request.contextPath}/cancelEvent${(empty event)? '': "?id=".concat(event.idEvent) }'"/>
+                                    <input type="button" value="Supprimer" class="btn btn-secondary" onclick="javascript:location.href='${pageContext.request.contextPath}/cancelEvent${(empty event)? '': "?id=".concat(event.idEvent) }'"/>
                             </div>
                             <div class="col-sm-auto d-none d-sm-block">
                                 <!-- Spacer pour le responsive -->
                             </div>
+                                &nbsp;
                             </c:if>
                             <div class="col-xs-6 center">
                                 <input type="button" value="cancel" class="btn btn-secondary" onclick="javascript:location.href='${pageContext.request.contextPath}/index'"/>

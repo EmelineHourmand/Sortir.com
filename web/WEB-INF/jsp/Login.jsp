@@ -9,12 +9,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Sortir.com</title>
     <jsp:include page="inc/CSS_JS_global.jsp"/>
-</head>
-<header>
-    <%-- Inclusion de la NavBar --%>
-    <jsp:include page="inc/NavBar_header.jsp"/>
     <script>
         function forgottenPass(){
             var emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -31,16 +27,18 @@
             return false;
         }
     </script>
-</header>
+</head>
 <body>
-
+<header>
+    <%-- Inclusion de la NavBar --%>
+    <jsp:include page="inc/NavBar_header.jsp"/>
+</header>
 <%--<c:set var="errLogin" value='oups' />--%>
     <c:if test="${!empty errLogin}">
         <div class="alert alert-danger text-center" role="alert">
             Informations de connexion incorrecte .
         </div>
     </c:if>
-
     <div class="container">
         <div class="row">
             <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
